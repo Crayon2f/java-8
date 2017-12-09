@@ -45,5 +45,7 @@ public class Article {
         this.count = count;
     }
 
-
+    public Article(String title) {
+        this.title = title;
+    }
 }

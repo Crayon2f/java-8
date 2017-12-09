@@ -1,6 +1,7 @@
 package com.ivan.java8.stream;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -125,6 +127,14 @@ public class Stream {
     @Test
     void mapToInt() {
 
-//        List<Integer> intList = Article.data.stream().mapToInt(Article::getCount).collect();
+        Map<String, String> map = Maps.newHashMap();
+        map.put("1", "a");
+        map.put("2", "b");
+        List<Map<String, String>> mapList = Lists.newArrayList(map);
+        mapList.forEach(stringStringMap -> {
+            System.out.println(stringStringMap);
+            System.out.println(stringStringMap);
+        });
+        System.out.println(mapList);
     }
 }
