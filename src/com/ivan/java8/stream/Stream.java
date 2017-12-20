@@ -2,6 +2,7 @@ package com.ivan.java8.stream;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Streams;
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
 import org.junit.jupiter.api.Test;
@@ -136,5 +137,14 @@ public class Stream {
             System.out.println(stringStringMap);
         });
         System.out.println(mapList);
+    }
+
+    @Test
+    /*
+      由并行转化成串行
+     */
+    void sequential() {
+        java.util.stream.Stream<String> stream = Arrays.stream(new String[]{"1", "3", "4"});
+        System.out.println(stream.sequential().collect(Collectors.toList()));
     }
 }

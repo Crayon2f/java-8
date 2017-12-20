@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import com.ivan.java8.pojo.Article;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -129,9 +130,9 @@ public class Function {
     @Test
     void toIntFunction() {
 
-        ToIntFunction<Article> intFunction = Article::getCount;
+        ToIntFunction<List<Article>> intFunction = List::size;
 
-        System.out.println(intFunction.applyAsInt(new Article("", "", 23)));
+        System.out.println(intFunction.applyAsInt(Lists.newArrayList()));
     }
 
 //    void

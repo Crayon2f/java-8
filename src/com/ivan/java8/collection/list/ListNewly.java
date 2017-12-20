@@ -11,15 +11,17 @@ import java.util.Spliterator;
  */
 class ListNewly {
 
-    List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6);
+    List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7);
 
     @Test
     void splIterator() {
 
         Spliterator<Integer> a =  list.spliterator();
+        a.trySplit().forEachRemaining(System.out::println);
+        System.out.println("===========");
+        a.trySplit().forEachRemaining(System.out::println);
         //此时结果：a:0-9（index-fence）
-//        if (a.tryAdvance(integer -> integer * 2) {
-//            a.forEachRemaining(System.out::println);
+//        if (a.tryAdvance(integer -> integer--)) {
 //        }
         Spliterator<Integer> b = a.trySplit();
         //此时结果：b:4-9,a:0-4

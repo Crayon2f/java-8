@@ -37,8 +37,18 @@ class MapNewly {
         map.replace("f", "6"); //没有对应的key,不报错,也不会新增值
         System.out.println(map);
 
-        map.replace("a", "3", "4"); //替换 存在的value, 如果不存在,则不替换
+        map.replace("f", "3", "4"); //替换 存在的value, 如果不存在,则不替换
         System.out.println(map.get("a"));
+    }
+
+    @Test
+    /**
+     * 如果值也符合,才remove
+     */
+    void remove() {
+
+        map.remove("a", "1");
+        System.out.println(map);
     }
 
     /**
@@ -61,12 +71,12 @@ class MapNewly {
     }
 
     /**
-     * 当key对应的value为null或者不存在时，使用计算的结果作为新的value(根据key计算)
+     * 当key对应的value为null或者key不存在时，使用计算的结果作为新的value(根据key计算)
      */
     @Test
     void computeIfAbsent() {
 
-        map.put("computeIfAbsent", null);
+//        map.put("computeIfAbsent", null);
 //        map.put("computeIfAbsent", "computeIfAbsent");
         map.computeIfAbsent("computeIfAbsent", key -> String.valueOf(key.length()));
         System.out.println(map);

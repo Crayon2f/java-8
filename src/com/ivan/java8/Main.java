@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Main {
 
@@ -57,6 +58,17 @@ public class Main {
 /// 半角字符串 ///
 ///全角空格为12288，半角空格为32
 ///其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248 ///
+    //1.人员需求:java开发至少2(API+后台PC,不包括运维),安卓1,苹果2,设计(UI)1，产品1，测试1。
+    //2.服务器：至少两台(开发,测试,生产环境,如果是苹果,还需要审核环境)
+    //3.支付：支付宝支付（需要申请阿里账号，需要准备一系列公司（个人）材料）；微信支付（需要注册微信商户，也需要公司材料，审核。）
+    //4.登录：手机登录（注册发短信的第三方账号）；第三方登录：微信，QQ需要注册，并审核通过，且前提是APP注册相关的已经完成。
+    //5.域名：需要注册。
+    //6.如果app需要推送，还需调用第三方推送（如极光）
+    //7.上线审核：苹果审核：每一次版本上线,都需要审核,时长至少一周。安卓审核：品牌众多，各个市场也不一样，比较麻烦，需要各个市场都审核。
+                                    //--> 客户端准备UI
+    //8.完成流程：需求确定-->原型图-->   //--> 后台PC开发    --> 客户端,服务端接口调试 -->测试 -->改bug -->审核 -->上线
+                                    //--> 服务端准备接口
+    //暂时想到的就这么多,可能还会根据具体需求,衍生出新的。
     public String toDBC(String input) {
         char[] c = input.toCharArray();
         for (int i = 0; i < c.length; i++) {
@@ -71,12 +83,17 @@ public class Main {
     }
 
     @Test
-    public void test() {
+    void test() {
 
-        System.out.println(toSBC(""));
-        System.out.println(toDBC("。。。；；‘’‘’"));
-
-        System.out.println(Integer.parseInt("ddd"));
+        IntStream.range(72,96).forEachOrdered(i -> {
+            if (i % 3 == 0) {
+                System.out.println();
+                System.out.print(i+2);
+            } else {
+                System.out.print(",");
+                System.out.print(i+2);
+            }
+        });
     }
 
 }
