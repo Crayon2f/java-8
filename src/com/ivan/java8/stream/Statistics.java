@@ -33,7 +33,10 @@ class Statistics {
         // 最大,最小值
         System.out.println(statistics.getMin());
         System.out.println(statistics.getMax());
-        //
+        // 平均值
+        System.out.println(statistics.getAverage());
+        // 个数
+        System.out.println(statistics.getCount());
     }
 
 

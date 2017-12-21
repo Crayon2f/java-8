@@ -103,10 +103,27 @@ public class Stream {
         System.out.println(countList); //[23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]
     }
 
+    /**
+     * 生成一个包含原Stream的所有元素的新Stream，同时会提供一个消费函数（Consumer实例），
+     * 新Stream每个元素被消费的时候都会执行给定的消费函数,不会消费流；
+     */
     @Test
     void peek() {
 
-        System.out.println(Article.data.stream().peek(article -> System.out.println(article.getCount())).collect(Collectors.toList()));
+        List<String> stringList = Lists.newArrayList("one", "two", "three", "four");
+        System.out.println(stringList.stream()
+                .peek(s -> System.out.println("peek:" + s)).filter(s -> s.length() > 4)
+                .peek(s -> System.out.println("filter:" + s))
+                .collect(Collectors.toList()));
+//        for (int i = 0; i < 20; i++) {
+//            java.util.stream.Stream.of("one", "two", "three", "four")
+//                    .peek(e -> System.out.println("Peeked value: " + e))
+//                    .map(String::toUpperCase)
+//                    .peek(e -> System.out.println("Mapped value: " + e))
+//                    .collect(Collectors.toList());
+//            System.out.println("============");
+//        }
+//        System.out.println(Article.data.stream().peek(article -> System.out.println(article.getCount())).collect(Collectors.toList()));
     }
 
     @Test

@@ -50,7 +50,8 @@ class StreamInt {
     void test() {
 
         IntStream intStream = IntStream.of(3,5,4,3,3);
-        System.out.println(intStream.sorted().sum());
+//        System.out.println(intStream.sorted().sum());
+        System.out.println(intStream.peek(System.out::println).distinct().boxed().collect(Collectors.toList()));
 //        intStream.summaryStatistics().
 //        System.out.println(intStream.sequential().boxed().collect(Collectors.toList()));
     }
