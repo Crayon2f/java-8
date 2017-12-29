@@ -110,20 +110,10 @@ public class Stream {
     @Test
     void peek() {
 
-        List<String> stringList = Lists.newArrayList("one", "two", "three", "four");
-        System.out.println(stringList.stream()
-                .peek(s -> System.out.println("peek:" + s)).filter(s -> s.length() > 4)
-                .peek(s -> System.out.println("filter:" + s))
-                .collect(Collectors.toList()));
-//        for (int i = 0; i < 20; i++) {
-//            java.util.stream.Stream.of("one", "two", "three", "four")
-//                    .peek(e -> System.out.println("Peeked value: " + e))
-//                    .map(String::toUpperCase)
-//                    .peek(e -> System.out.println("Mapped value: " + e))
-//                    .collect(Collectors.toList());
-//            System.out.println("============");
-//        }
-//        System.out.println(Article.data.stream().peek(article -> System.out.println(article.getCount())).collect(Collectors.toList()));
+        System.out.println(java.util.stream.Stream.of("one", "two", "three", "four")
+                .peek(e -> System.out.println("Peeked value: " + e))
+                .map(String::toUpperCase)
+                .peek(e -> System.out.println("Mapped value: " + e)));
     }
 
     @Test
@@ -154,6 +144,12 @@ public class Stream {
             System.out.println(stringStringMap);
         });
         System.out.println(mapList);
+    }
+
+    @Test
+    void find() {
+
+        Article.data.stream().findFirst();
     }
 
     @Test
