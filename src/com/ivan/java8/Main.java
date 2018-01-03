@@ -2,6 +2,7 @@ package com.ivan.java8;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.ivan.java8.kit.StringKit;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -63,12 +64,9 @@ public class Main {
 //        System.out.println(builder);
 //        System.out.println(collect);
 
-        String string = "2017-12-26 00:00:43";
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(string));
-        for (int i = 0; i < 100; i++) {
-
-            System.out.println(new Random().nextInt(10) % (10 - 0 + 1) + 0);
-        }
+        System.out.println(StringKit.isEmpty(StringKit.empty));
+        System.out.println(StringKit.isNotEmpty(null));
+        System.out.println(StringKit.trim(null).length());
     }
 
 }

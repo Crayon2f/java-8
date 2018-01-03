@@ -41,10 +41,10 @@ class MapNewly {
         System.out.println(map.get("a"));
     }
 
-    @Test
     /**
      * 如果值也符合,才remove
      */
+    @Test
     void remove() {
 
         map.remove("a", "1");

@@ -7,10 +7,7 @@ import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -149,7 +146,24 @@ public class Stream {
     @Test
     void find() {
 
-        Article.data.stream().findFirst();
+//        List<String> stringList = Collections.checkedList()
+        List<String> stringList = Lists.newArrayList();
+        stringList.add("a");
+        stringList.add("bb");
+        stringList.add("ccc");
+        stringList.add("ddd");
+        stringList.add("eight");
+        stringList.add("face");
+//        Collections.shuffle(stringList);
+        Optional<String> stringOptional = stringList.stream().filter(s -> s.length() > 6).findAny();
+        stringOptional.ifPresent(System.out::print);
+    }
+
+    @Test
+    void reduce() {
+
+        List<String> stringList = Lists.newArrayList("a","b","c","d","e","f","g");
+//        stringList.stream().fo
     }
 
     @Test
@@ -160,4 +174,5 @@ public class Stream {
         java.util.stream.Stream<String> stream = Arrays.stream(new String[]{"1", "3", "4"});
         System.out.println(stream.sequential().collect(Collectors.toList()));
     }
+
 }
