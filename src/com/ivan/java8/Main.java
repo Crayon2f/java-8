@@ -5,6 +5,8 @@ import com.google.common.collect.Maps;
 import com.ivan.java8.kit.StringKit;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -64,9 +66,27 @@ public class Main {
 //        System.out.println(builder);
 //        System.out.println(collect);
 
-        System.out.println(StringKit.isEmpty(StringKit.empty));
-        System.out.println(StringKit.isNotEmpty(null));
-        System.out.println(StringKit.trim(null).length());
+//        System.out.println(StringKit.isEmpty(StringKit.empty));
+//        System.out.println(StringKit.isNotEmpty(null));
+//        System.out.println(StringKit.trim(null).length());
+
+
+//        URL url = new URL("http://small-bronze.oss-cn-shanghai.aliyuncs.com/video/client/2018/1/3/BDD63518B4FB44B8A5D3ABFDA18B635B.mp4");
+//        InputStream inputStream = url.openStream();
+//        File file = new File("/" + UUID.randomUUID().toString() + ".mp4");
+//        System.out.println(file.getAbsolutePath());
+//        if (!file.exists() && file.createNewFile()) {
+//            FileOutputStream fos = new FileOutputStream(file);
+//            byte[] buffer = new byte[1024];
+//            int temp;
+//            while (-1 != (temp = inputStream.read(buffer))) {
+//                fos.write(buffer, 0, temp);
+//            }
+//            inputStream.close();
+//            fos.close();
+//        }
+
+
     }
 
 }

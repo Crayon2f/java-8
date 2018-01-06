@@ -2,14 +2,17 @@ package com.ivan.java8.stream;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Streams;
+import com.google.common.collect.Queues;
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.SynchronousQueue;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Created by feiFan.gou on 2017/10/14 17:16.
@@ -143,27 +146,86 @@ public class Stream {
         System.out.println(mapList);
     }
 
+    /**
+     * findFirst : 不管是stream() 还是 parallelStream(),都获取第一个
+     * findAny : stream()时,与findFirst一样,获取第一个;但是当是parallelStream()时候,获得随机
+     */
     @Test
     void find() {
 
 //        List<String> stringList = Collections.checkedList()
         List<String> stringList = Lists.newArrayList();
         stringList.add("a");
-        stringList.add("bb");
         stringList.add("ccc");
         stringList.add("ddd");
         stringList.add("eight");
         stringList.add("face");
+        stringList.add("face4");
+        stringList.add("face6");
+        stringList.add("bb");
+        stringList.add("face1");
+        stringList.add("face3");
+        stringList.add("face5");
 //        Collections.shuffle(stringList);
-        Optional<String> stringOptional = stringList.stream().filter(s -> s.length() > 6).findAny();
-        stringOptional.ifPresent(System.out::print);
+        for (int i = 0; i < 1000; i++) {
+            Optional<String> stringOptional = stringList.parallelStream().findAny();
+            stringOptional.ifPresent(System.out::println);
+        }
+        System.out.println("+++++++++++++++++++++++++++++++++");
+        for (int i = 0; i < 20; i++) {
+            Optional<String> stringOptional = stringList.parallelStream().findFirst();
+            stringOptional.ifPresent(System.out::println);
+        }
+
+
     }
 
     @Test
     void reduce() {
 
         List<String> stringList = Lists.newArrayList("a","b","c","d","e","f","g");
-//        stringList.stream().fo
+        java.util.stream.Stream<String> stringStream = stringList.stream();
+        { // param_type 1 : BinaryOperator
+//            Optional<String> reduceBinaryOperator = stringStream.reduce((first, second) -> {
+//                System.out.println(first);
+//                System.out.println(second);
+//                System.out.println("==================");
+//                return first + second;
+//            });
+//            reduceBinaryOperator.ifPresent(System.out::println);
+        }
+        { //param_type 2: identity参数，用来指定Stream循环的初始值。如果Stream为空，就直接返回该值。另一方面，该方法不会返回Optional，因为该方法不会出现null。
+//            String reduceIdentity = stringStream.reduce("-1", (first, second) -> {
+//                System.out.println(first);
+//                System.out.println(second);
+//                System.out.println("==================");
+//                return first + second;
+//            });
+//            System.out.println(reduceIdentity);
+        }
+        { //param_type 3 Stream是支持并发操作的，为了避免竞争，对于reduce线程都会有独立的result，combiner的作用在于合并每个线程的result得到最终结果。
+            // 这也说明了了第三个函数参数的数据类型必须为返回数据类型了 当
+
+            // 使用队列可以保证线程安全
+            ArrayBlockingQueue<String> queue = Queues.newArrayBlockingQueue(100);
+            CopyOnWriteArrayList<String> copyOnWriteList = new CopyOnWriteArrayList<>();
+            ArrayBlockingQueue blockingQueue = Lists.newArrayList("1", "2", "3").parallelStream().reduce(queue, (first, second) -> {
+                try {
+                    first.put(second);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("accumulator");
+                System.out.println(first);
+                return first;
+            }, (first, second) -> {
+                System.out.println("combiner");
+                System.out.println(first);
+                return first;
+            });
+//            System.out.println(stringArrayList);
+//            System.out.println(i);
+        }
     }
 
     @Test
