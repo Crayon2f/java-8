@@ -2,14 +2,13 @@ package com.ivan.java8.optional;
 
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import java.util.Optional;
 
 /**
  * Created by feiFan.gou on 2017/12/22 17:56.
  */
-class OptionalLearn {
+public class OptionalLearn {
 
 
     private static boolean bool = false;
@@ -22,7 +21,7 @@ class OptionalLearn {
     }
 
     @Test
-    void ifPresent() {
+    public void ifPresent() {
 
         Article article = new Article("title");
         System.out.println(testIfPresent(article));
@@ -37,7 +36,7 @@ class OptionalLearn {
      * t为null时候,返回一个T类型的(默认)值
      */
     @Test
-    void orElse() {
+    public void orElse() {
 
         Optional<String> stringOptional = Optional.empty();
         System.out.println(stringOptional.orElse("empty"));
@@ -48,7 +47,7 @@ class OptionalLearn {
      * t为null时候,传入一个接口,并返回类型T的值
      */
     @Test
-    void orElseGet() {
+    public void orElseGet() {
 
         Optional<String> stringOptional = Optional.empty();
         stringOptional.orElseGet(this::empty);
@@ -60,7 +59,7 @@ class OptionalLearn {
      * t为null时候,抛出一个异常
      */
     @Test
-    void orElseThrow() {
+    public void orElseThrow() {
 
         String string = StringKit.empty;
         if (bool) {
@@ -80,7 +79,7 @@ class OptionalLearn {
      * !!! 需要有结束函数
      */
     @Test
-    void map() {
+    public void map() {
 
         Optional<String> stringOptional = Optional.of("23");
 
@@ -106,7 +105,7 @@ class OptionalLearn {
      * 过滤器,同stream中的filter
      */
     @Test
-    void filter() {
+    public void filter() {
 
         Optional<String> stringOptional = Optional.empty();
 //        stringOptional.filter(String::isEmpty).ifPresent(s -> System.out.println("empty"));
@@ -121,7 +120,7 @@ class OptionalLearn {
      * 而flatMap方法的mapping函数必须是Optional。
      */
     @Test
-    void flatMap() {
+    public void flatMap() {
 
         Optional<String> stringOptional = Optional.of("abc");
         stringOptional.flatMap(s -> Optional.of(s.toUpperCase())).ifPresent(System.out::print);

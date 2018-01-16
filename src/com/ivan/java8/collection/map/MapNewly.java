@@ -1,18 +1,18 @@
 package com.ivan.java8.collection.map;
 
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
 /**
  * Created by feiFan.gou on 2017/12/9 11:38.
+ * 1.8 map新增的方法
  */
-class MapNewly {
+public class MapNewly {
 
     private Map<String, String> map = new HashMap<String, String>() {{
-        put("a", "1");
+        put("a", "");
         put("b", "2");
         put("c", "3");
         put("d", "4");
@@ -20,7 +20,7 @@ class MapNewly {
     }};
 
     @Test
-    void each() {
+    public void each() {
 
         map.forEach((key, value) -> {
             System.out.println(key);
@@ -30,7 +30,7 @@ class MapNewly {
     }
 
     @Test
-    void replace() {
+    public void replace() {
 
         map.replace("a", "3"); //覆盖
         System.out.println(map.get("a"));
@@ -45,7 +45,7 @@ class MapNewly {
      * 如果值也符合,才remove
      */
     @Test
-    void remove() {
+    public void remove() {
 
         map.remove("a", "1");
         System.out.println(map);
@@ -55,7 +55,7 @@ class MapNewly {
      * 获取一个不存在的key,但是依然有值,即存入的默认值
      */
     @Test
-    void getOrDefault() {
+    public void getOrDefault() {
 
 //        map.put("f", null);
         System.out.println(map.getOrDefault("f", "6"));
@@ -63,7 +63,7 @@ class MapNewly {
     }
 
     @Test
-    void merge() {
+    public void merge() {
 
         System.out.println(map.get("a"));
         map.merge("a", "2", (oldValue, param) -> oldValue + param);
@@ -74,7 +74,7 @@ class MapNewly {
      * 当key对应的value为null或者key不存在时，使用计算的结果作为新的value(根据key计算)
      */
     @Test
-    void computeIfAbsent() {
+    public void computeIfAbsent() {
 
 //        map.put("computeIfAbsent", null);
 //        map.put("computeIfAbsent", "computeIfAbsent");
@@ -86,12 +86,19 @@ class MapNewly {
      * 当key对应的value存在，并且不是null时，使用计算的结果作为新的value 【******并且会根据key排序】
      */
     @Test
-    void computeIfPresent() {
+    public void computeIfPresent() {
 
 //        map.put("computeIfPresent", null);
         map.put("computeIfPresent", "computeIfPresent");
         map.computeIfPresent("computeIfPresent", (key, value) -> key + " ====== " + value);
         System.out.println(map);
 
+    }
+
+    @Test
+    public void putIfAbsent() {
+
+        map.putIfAbsent("a", "33");
+        System.out.println(map);
     }
 }

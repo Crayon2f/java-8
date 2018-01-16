@@ -3,7 +3,7 @@ package com.ivan.java8;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ivan.java8.kit.StringKit;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -86,6 +86,9 @@ public class Main {
 //            fos.close();
 //        }
 
+
+        URL url = new URL("https://m.weibo.cn/api/comments/show?id=4189695929516410&page=1");
+        System.out.println(url.getContent());
 
     }
 

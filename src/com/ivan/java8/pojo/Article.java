@@ -2,6 +2,7 @@ package com.ivan.java8.pojo;
 
 import com.google.common.collect.Lists;
 import lombok.Data;
+import lombok.ToString;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by feiFan.gou on 2017/8/21 17:53.
  */
 @Data
+@ToString
 public class Article {
 
     private String title;
@@ -27,7 +29,7 @@ public class Article {
                 new Article("标题4", "作者1", 12),
                 new Article("标题7", "作者4", 1),
                 new Article("标题3", "作者5", 10),
-                new Article("标题1", null, 11),
+                new Article("标题1", "作者3", 11),
                 new Article("标题10", "作者5", 3),
                 new Article("标题6", "作者5", 4),
                 new Article("标题2", "作者4", 7),

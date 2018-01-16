@@ -4,8 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.ivan.java8.pojo.Article;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +25,7 @@ import java.util.function.*;
 public class Function {
 
     @Test
-    void function() {
+    public void function() {
 
         java.util.function.Function<List<String>, String> function = (x) -> {
             x.forEach(System.out::println); //当放只有一个参数,且,参数类型刚好是Function中参数T的类型,可使用lambda表达式Object::method,且不用写参数
@@ -34,7 +33,7 @@ public class Function {
         };
         System.out.println(function.apply(Lists.newArrayList("a", "b")));
 
-        java.util.function.Function<Integer, String> fun = integer -> {
+        java.util.function.Function<Integer, String> fun = (integer) -> {
             if (null != integer) {
                 return integer.toString() + "[string]";
             }
@@ -61,7 +60,7 @@ public class Function {
      * Consumer<T>——接收T对象，不返回值
      */
     @Test
-    void consumer() throws InterruptedException {
+    public void consumer() throws InterruptedException {
 
         Consumer<String> consumer = x -> {
             System.out.println(x);
@@ -87,7 +86,7 @@ public class Function {
      * Supplier<T>——提供T对象（例如工厂），不接收值
      */
     @Test
-    void supplier() {
+    public void supplier() {
 
         Supplier<List<String>> supplier = () -> Lists.newArrayList("aa", "bb");
 
@@ -98,7 +97,7 @@ public class Function {
      * Predicate<T>——接收T对象并返回boolean
      */
     @Test
-    void predicate() {
+    public void predicate() {
 
         Predicate<Integer> predicate = x -> x == 12;
         /**
@@ -117,7 +116,7 @@ public class Function {
      * UnaryOperator<T>——接收T对象，返回T对象
      */
     @Test
-    void unaryOperator() { //一元运算,继承Function 和Function不同的是:传入值和返回值类型一致
+    public void unaryOperator() { //一元运算,继承Function 和Function不同的是:传入值和返回值类型一致
 
         UnaryOperator<List<String>> operator = strings -> strings.subList(1, 3);
 
@@ -128,14 +127,14 @@ public class Function {
 
 
     @Test
-    void toIntFunction() {
+    public void toIntFunction() {
 
         ToIntFunction<List<Article>> intFunction = List::size;
 
         System.out.println(intFunction.applyAsInt(Lists.newArrayList()));
     }
 
-//    void
+//    public void
 }
 
 

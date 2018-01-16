@@ -1,8 +1,7 @@
 package com.ivan.java8.kit;
 
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,11 +9,11 @@ import java.io.IOException;
 /**
  * Created by feiFan.gou on 2017/11/28 16:52.
  */
-class PoiKit {
+public class PoiKit {
 
 
     @Test
-    void test() throws IOException {
+    public void test() throws IOException {
 
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("test");

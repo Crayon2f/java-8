@@ -5,13 +5,11 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Queues;
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.SynchronousQueue;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +22,7 @@ public class Stream {
      * 如何生成
      */
     @Test
-    void generator() {
+    public void generator() {
 
         /* 1.从 Collection 和数组
             Collection.stream()
@@ -48,7 +46,7 @@ public class Stream {
     }
 
     @Test
-    void sort() {
+    public void sort() {
 
         List<Article> sortList = Article.data.stream().sorted(Comparator.comparing(Article::getCount)).collect(Collectors.toList());
 
@@ -62,7 +60,7 @@ public class Stream {
     }
 
     @Test
-    void filter() {
+    public void filter() {
 
         List<Article> filterList = Article.data.stream().filter(article -> {
 
@@ -76,7 +74,7 @@ public class Stream {
     }
 
     @Test
-    void map() {
+    public void map() {
 
         List<String> mapList = Article.data.stream().map(article -> {
             String author = StringKit.trim(article.getAuthor());
@@ -93,7 +91,7 @@ public class Stream {
      * 和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中；
      */
     @Test
-    void flatMap() {
+    public void flatMap() {
 
         List<Integer> countList = Article.data.stream().flatMap(article -> { //继续对父级进行操作后,再进行其他操作
             article.setCount(23);
@@ -108,7 +106,7 @@ public class Stream {
      * 新Stream每个元素被消费的时候都会执行给定的消费函数,不会消费流；
      */
     @Test
-    void peek() {
+    public void peek() {
 
         System.out.println(java.util.stream.Stream.of("one", "two", "three", "four")
                 .peek(e -> System.out.println("Peeked value: " + e))
@@ -117,13 +115,13 @@ public class Stream {
     }
 
     @Test
-    void limit() {
+    public void limit() {
 
         System.out.println(Article.data.stream().limit(3).collect(Collectors.toList()));
     }
 
     @Test
-    void skip() {
+    public void skip() {
 
         System.out.println(Article.data.stream().skip(9).collect(Collectors.toList()));
 
@@ -133,7 +131,7 @@ public class Stream {
     }
 
     @Test
-    void mapToInt() {
+    public void mapToInt() {
 
         Map<String, String> map = Maps.newHashMap();
         map.put("1", "a");
@@ -151,7 +149,7 @@ public class Stream {
      * findAny : stream()时,与findFirst一样,获取第一个;但是当是parallelStream()时候,获得随机
      */
     @Test
-    void find() {
+    public void find() {
 
 //        List<String> stringList = Collections.checkedList()
         List<String> stringList = Lists.newArrayList();
@@ -181,7 +179,7 @@ public class Stream {
     }
 
     @Test
-    void reduce() {
+    public void reduce() {
 
         List<String> stringList = Lists.newArrayList("a","b","c","d","e","f","g");
         java.util.stream.Stream<String> stringStream = stringList.stream();
@@ -232,7 +230,7 @@ public class Stream {
     /*
       由并行转化成串行
      */
-    void sequential() {
+    public void sequential() {
         java.util.stream.Stream<String> stream = Arrays.stream(new String[]{"1", "3", "4"});
         System.out.println(stream.sequential().collect(Collectors.toList()));
     }

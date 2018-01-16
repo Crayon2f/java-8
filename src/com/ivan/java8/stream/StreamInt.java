@@ -2,8 +2,7 @@ package com.ivan.java8.stream;
 
 import com.google.common.collect.Lists;
 import com.ivan.java8.pojo.Article;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -13,7 +12,7 @@ import java.util.stream.IntStream;
 /**
  * Created by feiFan.gou on 2017/12/12 11:31.
  */
-class StreamInt {
+public class StreamInt {
 
     /**
      * 取一个区间
