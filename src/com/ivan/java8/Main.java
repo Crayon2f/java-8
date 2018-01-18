@@ -52,7 +52,7 @@ public class Main {
     }
 
     @Test
-    void test() throws IOException, ParseException {
+    public void test() throws IOException, ParseException {
 
 //        System.out.println(Stream.of("a", "b", "c").peek(System.out::println).peek(System.out::println).collect(Collectors.toList()));
 
@@ -87,8 +87,12 @@ public class Main {
 //        }
 
 
-        URL url = new URL("https://m.weibo.cn/api/comments/show?id=4189695929516410&page=1");
-        System.out.println(url.getContent());
+        Integer a = 3333;
+        Integer b = 2;
+        Integer c = 2;
+        System.out.println(a.compareTo(b));
+        System.out.println(b.compareTo(a));
+        System.out.println(c.compareTo(b));
 
     }
 

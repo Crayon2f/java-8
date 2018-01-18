@@ -22,6 +22,8 @@ public class Article {
 
     private Integer count;
 
+    private Double price = 0d;
+
     public static List<Article> data;
 
     static {
@@ -29,12 +31,12 @@ public class Article {
                 new Article("标题4", "作者1", 12),
                 new Article("标题7", "作者4", 1),
                 new Article("标题3", "作者5", 10),
-                new Article("标题1", "作者3", 11),
-                new Article("标题10", "作者5", 3),
-                new Article("标题6", "作者5", 4),
+                new Article("标题1", "作者3", 11, 3.4),
+                new Article("标题10", "作者5", 3, 3d),
+                new Article("标题6", "作者5", 4, 7d),
                 new Article("标题2", "作者4", 7),
                 new Article("标题8", "作者2", 5),
-                new Article("标题9", "作者6", 2),
+                new Article("标题9", "作者6", 2, 8.3),
                 new Article("标题5", "作者6", 6),
                 new Article("标题11", "作者11", 9),
                 new Article("标题12", "作者12", 8)
@@ -45,6 +47,13 @@ public class Article {
         this.title = title;
         this.author = author;
         this.count = count;
+    }
+
+    public Article(String title, String author, Integer count,Double price) {
+        this.title = title;
+        this.author = author;
+        this.count = count;
+        this.price = price;
     }
 
     public Article(String title) {

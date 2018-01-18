@@ -1,6 +1,7 @@
 package com.ivan.java8.kit;
 
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.junit.Test;
 
 import java.io.File;
@@ -22,6 +23,11 @@ public class PoiKit {
         cell.setCellValue("哈哈哈哈");
         HSSFCellStyle style = workbook.createCellStyle();
         style.setFont(setHeaderFont(workbook));
+        cell.setCellStyle(style);
+        HSSFFont font = workbook.createFont();
+        font.setColor(HSSFColor.HSSFColorPredefined.BRIGHT_GREEN.getIndex());
+        font.setBold(true);
+        style.setFont(font);
         cell.setCellStyle(style);
         workbook.write(new File("d://java_excel.xls"));
         workbook.close();
