@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +14,6 @@ import java.util.List;
  * Created by feiFan.gou on 2017/8/21 17:53.
  */
 @Data
-@ToString
 public class Article {
 
     private String title;
@@ -39,7 +39,8 @@ public class Article {
                 new Article("标题9", "作者6", 2, 8.3),
                 new Article("标题5", "作者6", 6),
                 new Article("标题11", "作者11", 9),
-                new Article("标题12", "作者12", 8)
+                new Article("标题12", "作者12", 8),
+                null
         );
     }
 
@@ -49,7 +50,7 @@ public class Article {
         this.count = count;
     }
 
-    public Article(String title, String author, Integer count,Double price) {
+    public Article(String title, String author, Integer count, Double price) {
         this.title = title;
         this.author = author;
         this.count = count;
@@ -58,5 +59,11 @@ public class Article {
 
     public Article(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\r{title:%s,author:%s,count:%d,price:%.2f}\r\n",
+                title, author, count, price);
     }
 }
