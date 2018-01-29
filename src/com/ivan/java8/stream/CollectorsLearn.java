@@ -146,6 +146,10 @@ public class CollectorsLearn {
         System.out.println(collect);
 
         // 再次拼装
+//        Map<Boolean,String> partitioningByMaleGender = Employee.persons()
+//                .stream()
+//                .collect(Collectors.partitioningBy(Employee::isMale,
+//                        Collectors.mapping(Employee::getName, Collectors.joining(", "))));
         Map<Boolean,String> partitioningByMaleGender = Employee.persons()
                 .stream()
                 .collect(Collectors.partitioningBy(Employee::isMale,
@@ -193,5 +197,11 @@ public class CollectorsLearn {
         System.out.println(collect);
 
         // double,long 同上 summingDouble summingLong
+    }
+
+    @Test
+    public void test() {
+
+
     }
 }

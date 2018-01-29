@@ -5,10 +5,7 @@ import com.google.common.collect.Maps;
 import com.ivan.java8.kit.StringKit;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,14 +83,24 @@ public class Main {
 //            fos.close();
 //        }
 
+//        FileInputStream fis = new FileInputStream("D:\\downloads\\剧本1.lrc");
+//        byte[] buffer = new byte[1024];
+//        int temp;
+//        while (-1 != (temp = fis.read(buffer))) {
+//            fis.read()
+//        }
+        BufferedReader reader = new BufferedReader(new FileReader("D:\\downloads\\剧本1.lrc"));
+        while (null != reader.readLine()) {
+            if (null == reader.readLine()) {
+                break;
+            }
+            System.out.println(null == reader.readLine());
+            int to = reader.readLine().indexOf("]");
+            System.out.println(reader.readLine().substring(1, to));
+        }
+        reader.close();
 
-        Integer a = 3333;
-        Integer b = 2;
-        Integer c = 2;
-        System.out.println(a.compareTo(b));
-        System.out.println(b.compareTo(a));
-        System.out.println(c.compareTo(b));
-
+        System.out.println(Arrays.toString("asdjf.dlsfk".split("\\.")));
     }
 
 }

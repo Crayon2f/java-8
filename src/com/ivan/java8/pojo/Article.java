@@ -39,8 +39,9 @@ public class Article {
                 new Article("标题9", "作者6", 2, 8.3),
                 new Article("标题5", "作者6", 6),
                 new Article("标题11", "作者11", 9),
-                new Article("标题12", "作者12", 8),
-                null
+                new Article("标题12", "作者12", 8)
+//                ,
+//                null
         );
     }
 

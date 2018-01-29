@@ -184,13 +184,16 @@ public class Stream {
         List<String> stringList = Lists.newArrayList("a","b","c","d","e","f","g");
         java.util.stream.Stream<String> stringStream = stringList.stream();
         { // param_type 1 : BinaryOperator
-//            Optional<String> reduceBinaryOperator = stringStream.reduce((first, second) -> {
-//                System.out.println(first);
-//                System.out.println(second);
-//                System.out.println("==================");
-//                return first + second;
-//            });
-//            reduceBinaryOperator.ifPresent(System.out::println);
+            Optional<String> reduceBinaryOperator = stringStream.reduce((first, second) -> {
+                System.out.println(first);
+                System.out.println(second);
+                System.out.println("==================");
+                if (second.equals("c")) {
+                    throw new RuntimeException();
+                }
+                return first + second;
+            });
+            reduceBinaryOperator.ifPresent(System.out::println);
         }
         { //param_type 2: identity参数，用来指定Stream循环的初始值。如果Stream为空，就直接返回该值。另一方面，该方法不会返回Optional，因为该方法不会出现null。
 //            String reduceIdentity = stringStream.reduce("-1", (first, second) -> {
@@ -205,22 +208,22 @@ public class Stream {
             // 这也说明了了第三个函数参数的数据类型必须为返回数据类型了 当
 
             // 使用队列可以保证线程安全
-            ArrayBlockingQueue<String> queue = Queues.newArrayBlockingQueue(100);
-            CopyOnWriteArrayList<String> copyOnWriteList = new CopyOnWriteArrayList<>();
-            ArrayBlockingQueue blockingQueue = Lists.newArrayList("1", "2", "3").parallelStream().reduce(queue, (first, second) -> {
-                try {
-                    first.put(second);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("accumulator");
-                System.out.println(first);
-                return first;
-            }, (first, second) -> {
-                System.out.println("combiner");
-                System.out.println(first);
-                return first;
-            });
+//            ArrayBlockingQueue<String> queue = Queues.newArrayBlockingQueue(100);
+//            CopyOnWriteArrayList<String> copyOnWriteList = new CopyOnWriteArrayList<>();
+//            ArrayBlockingQueue blockingQueue = Lists.newArrayList("1", "2", "3").parallelStream().reduce(queue, (first, second) -> {
+//                try {
+//                    first.put(second);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println("accumulator");
+//                System.out.println(first);
+//                return first;
+//            }, (first, second) -> {
+//                System.out.println("combiner");
+//                System.out.println(first);
+//                return first;
+//            });
 //            System.out.println(stringArrayList);
 //            System.out.println(i);
         }
@@ -235,4 +238,28 @@ public class Stream {
         System.out.println(stream.sequential().collect(Collectors.toList()));
     }
 
+    @Test
+    public void allMatch() {
+
+        if (Article.data.stream().allMatch(Objects::nonNull)) {
+            System.out.println("all not null");
+        } else {
+            System.out.println("has null article");
+        }
+    }
+
+    @Test
+    public void test() {
+
+        List<String> stringList = Lists.newArrayList();
+        Map<String, List<Article>> collect = Article.data.parallelStream().peek(article -> {
+            stringList.add(article.getTitle());
+        }).collect(Collectors.groupingBy(Article::getAuthor));
+
+        System.out.println(stringList);
+        collect.forEach((key, value) -> {
+            System.out.println("key = " + key);
+            System.out.println("value = " + value.parallelStream().count());
+        });
+    }
 }

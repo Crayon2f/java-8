@@ -31,6 +31,28 @@ public class OptionalLearn {
         stringOptional.ifPresent(System.out::print);
     }
 
+
+    /**
+     * orElse xxx 一类的方法如果和多个filter结合使用,那么只要其中有一个filter不符合,则都会走orElse xxx 方法
+     */
+
+    @Test
+    public void orElseWithManyFilers() {
+
+        Integer i = 3;
+//        Integer i = 9;
+//        Integer i = 4;
+        Optional.of(i).filter(integer -> integer % 3 == 0).filter(integer -> integer > 5).map(integer -> {
+            System.out.println(integer);
+            return integer;
+        }).orElseGet(() -> {
+            System.out.println("===== orElse ====");
+            return 0;
+        });
+    }
+
+
+
     /**
      * Optional<T> stringOptional = Optional.ofNullable(t);
      * t为null时候,返回一个T类型的(默认)值
