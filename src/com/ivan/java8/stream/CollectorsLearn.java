@@ -160,8 +160,8 @@ public class CollectorsLearn {
     @Test
     public void averaging() {
 
-//        Stream<String> stringStream = Stream.of("1.4","2.4","3.5"); // double 值
-//        Stream<String> stringStream = Stream.of("1","2","3"); //int 值
+//        Stream<String> stringStream = StreamLearn.of("1.4","2.4","3.5"); // double 值
+//        Stream<String> stringStream = StreamLearn.of("1","2","3"); //int 值
         Stream<String> stringStream = Stream.of("1","2","3"); //long 值
 //        double d =  stringStream.collect(Collectors.averagingDouble(Double::parseDouble));
 //        double d = stringStream.collect(Collectors.averagingInt(Integer::parseInt));

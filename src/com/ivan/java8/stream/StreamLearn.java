@@ -2,48 +2,20 @@ package com.ivan.java8.stream;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Queues;
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
+import com.ivan.java8.pojo.Employee;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by feiFan.gou on 2017/10/14 17:16.
  */
-public class Stream {
+public class StreamLearn {
 
-
-    /**
-     * 如何生成
-     */
-    @Test
-    public void generator() {
-
-        /* 1.从 Collection 和数组
-            Collection.stream()
-            Collection.parallelStream()
-            Arrays.stream(T array) or Stream.of()
-         */
-        List<Integer> list = Lists.newArrayList(2,1,4,6,3,6);
-
-        System.out.println(list.stream().max(Comparator.comparing(integer -> integer >= 6)));
-
-        list.parallelStream().forEachOrdered(System.out::print);
-        System.out.println();
-        System.out.println(" =========== ");
-        list.parallelStream().forEach(System.out::print);
-        System.out.println();
-
-        Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 6, 5}).distinct().forEach(System.out::print);
-        System.out.println();
-        System.out.println(Arrays.stream(new int[]{1, 3, 4, 5, 6, 34, 3}).peek(integer -> System.out.println("======")));
-
-    }
 
     @Test
     public void sort() {
@@ -62,13 +34,7 @@ public class Stream {
     @Test
     public void filter() {
 
-        List<Article> filterList = Article.data.stream().filter(article -> {
-
-            if (null == article.getAuthor()) {
-                return false;
-            }
-            return article.getAuthor().length() == 4;
-        }).collect(Collectors.toList());
+        List<Article> filterList = Article.data.stream().filter(article -> null != article.getAuthor() && article.getAuthor().length() == 4).collect(Collectors.toList());
 
         filterList.forEach(System.out::println);
     }
@@ -108,10 +74,12 @@ public class Stream {
     @Test
     public void peek() {
 
-        System.out.println(java.util.stream.Stream.of("one", "two", "three", "four")
-                .peek(e -> System.out.println("Peeked value: " + e))
-                .map(String::toUpperCase)
-                .peek(e -> System.out.println("Mapped value: " + e)));
+        int number = Stream.of(1,2,3,4,5).peek(e -> System.out.println("Taking integer: " + e))
+                .filter(n -> n % 2 == 1)
+                .peek(e -> System.out.println("Filtered integer: " + e))
+                .map(n -> n * n).peek(e -> System.out.println("Mapped integer: " + e))
+                .reduce(0, Integer::sum);
+        System.out.println(number);
     }
 
     @Test
@@ -181,7 +149,7 @@ public class Stream {
     @Test
     public void reduce() {
 
-        List<String> stringList = Lists.newArrayList("a","b","c","d","e","f","g");
+        List<String> stringList = Lists.newArrayList("a", "b", "c", "d", "e", "f", "g");
         java.util.stream.Stream<String> stringStream = stringList.stream();
         { // param_type 1 : BinaryOperator
             Optional<String> reduceBinaryOperator = stringStream.reduce((first, second) -> {
@@ -239,8 +207,10 @@ public class Stream {
     }
 
     @Test
-    public void allMatch() {
+    public void match() {
 
+        System.out.println(Employee.persons().stream().anyMatch(Employee::isMale));
+        System.out.println(Employee.persons().stream().noneMatch(Employee::isMale));
         if (Article.data.stream().allMatch(Objects::nonNull)) {
             System.out.println("all not null");
         } else {

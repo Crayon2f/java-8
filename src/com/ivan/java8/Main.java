@@ -2,17 +2,16 @@ package com.ivan.java8;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.ivan.java8.function.FunInterface;
 import com.ivan.java8.kit.StringKit;
 import org.junit.Test;
 
-import java.io.*;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Main {
 
@@ -90,17 +89,27 @@ public class Main {
 //            fis.read()
 //        }
         BufferedReader reader = new BufferedReader(new FileReader("D:\\downloads\\剧本1.lrc"));
-        while (null != reader.readLine()) {
-            if (null == reader.readLine()) {
-                break;
-            }
-            System.out.println(null == reader.readLine());
-            int to = reader.readLine().indexOf("]");
-            System.out.println(reader.readLine().substring(1, to));
+        String line;
+        while (null != (line = reader.readLine())) {
+            System.out.println("===================");
+            Optional.of(line).filter(StringKit::isNotEmpty).ifPresent(System.out::println);
         }
         reader.close();
 
-        System.out.println(Arrays.toString("asdjf.dlsfk".split("\\.")));
+        FunInterface funInterface = ((x, y) -> {
+            System.out.println(x + y);
+            System.out.println(x + y);
+        });
+
+
+        Float f = 0.345456f;
+        System.out.println(String.format("%.2f", f * 100));
+
+        System.out.println(Character.isDigit('a'));
+        System.out.println(Character.isWhitespace(' '));
+        System.out.println(Charset.forName("UTF-8").toString());
+
+        "abc".chars().forEach(c -> System.out.println((char) c));
     }
 
 }

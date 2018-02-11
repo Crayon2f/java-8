@@ -1,4 +1,4 @@
-package com.ivan.java8.google.guava;
+package com.ivan.java8.google;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;

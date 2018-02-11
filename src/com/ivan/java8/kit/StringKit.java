@@ -9,6 +9,10 @@ public class StringKit {
 
     public static final String empty = "";
 
+    public static final String divide = " ========================================== divide line =============================================== ";
+
+    public static final String half_divide = " ======================================== ";
+
     public static boolean isEmpty(String string) {
 
         return Optional.ofNullable(string).orElse(empty).equals(empty);

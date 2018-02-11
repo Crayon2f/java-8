@@ -26,6 +26,8 @@ public class Article {
 
     public static List<Article> data;
 
+    private Boolean whetherPrivate = false;
+
     static {
         data = Lists.newArrayList(
                 new Article("标题4", "作者1", 12),

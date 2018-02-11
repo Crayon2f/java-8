@@ -86,9 +86,9 @@ public class Employee {
         return Arrays.asList(p1, p2, p3, p4, p5, p6);
     }
 
-    @Override
-    public String toString() {
-        return String.format("(%s, %s,  %s,  %s,  %.2f)\n", id, name, gender,
-                dob, income);
-    }
+//    @Override
+//    public String toString() {
+//        return String.format("(%s, %s,  %s,  %s,  %.2f)\n", id, name, gender,
+//                dob, income);
+//    }
 }
