@@ -69,4 +69,14 @@ public class Article {
         return String.format("\r{title:%s,author:%s,count:%d,price:%.2f}\r\n",
                 title, author, count, price);
     }
+
+    public void read(Integer count) {
+
+        System.out.println(String.format("this article count is %d", count));
+    }
+
+    public void read(String title) {
+
+        System.out.println(String.format("this article title is %s", title));
+    }
 }

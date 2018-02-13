@@ -1,5 +1,6 @@
 package com.ivan.java8.scripting;
 
+import com.ivan.java8.Interface;
 import com.ivan.java8.kit.ScriptingKit;
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
@@ -13,7 +14,9 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static javax.script.ScriptContext.ENGINE_SCOPE;
 import static javax.script.ScriptContext.GLOBAL_SCOPE;
@@ -49,7 +52,7 @@ public class Scripting {
     }
 
     @Test
-    public void FindOutTheSyntax() throws ScriptException {
+    public void findOutTheSyntax() throws ScriptException {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine javascript = manager.getEngineByName("javascript");
@@ -87,7 +90,7 @@ public class Scripting {
     @Test
     public void runJavascriptFromJsFile() {
 
-        String jsFile = this.getClass().getResource("/test.js").getFile().substring(1);
+        String jsFile = this.getClass().getResource("/javascript/test.js").getFile().substring(1);
         Path path = Paths.get(jsFile);
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         try (Reader reader = Files.newBufferedReader(path)) {
@@ -141,7 +144,7 @@ public class Scripting {
     public void engineGet() {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
-        ScriptingKit.runJsFile(this.getClass().getResource("/test.js").getFile().substring(1), engine, null);
+        ScriptingKit.runJsFile(this.getClass().getResource("/javascript/test.js").getFile().substring(1), engine, null);
         Article article = ScriptingKit.get(engine, "article");
         System.out.println(StringKit.divide);
         System.out.println(article);
@@ -153,7 +156,7 @@ public class Scripting {
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         Bindings bindings = engine.createBindings();
         bindings.put("key_1", 90);
-        Object result = ScriptingKit.runJsFile(this.getClass().getResource("/test.js").getFile().substring(1), engine, bindings);
+        Object result = ScriptingKit.runJsFile(this.getClass().getResource("/javascript/test.js").getFile().substring(1), engine, bindings);
         System.out.println(result);
 
     }
@@ -203,7 +206,7 @@ public class Scripting {
     public void runJsByLoad() throws ScriptException {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
-        ScriptingKit.runJsFile(this.getClass().getResource("/test.js").getFile().substring(1), engine);
+        ScriptingKit.runJsFile(this.getClass().getResource("/javascript/test.js").getFile().substring(1), engine);
         Object result = engine.eval("add(1,2)");
         System.out.println(result);
     }
@@ -212,11 +215,70 @@ public class Scripting {
      * 有点像反射
      */
     @Test
-    public void callJsFunction() {
+    public void callJsFunction() throws ScriptException, NoSuchMethodException {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
-        ScriptingKit.runJsFile(this.getClass().getResource("/test.js").getFile().substring(1), engine);
+        ScriptingKit.runJsFile(this.getClass().getResource("/javascript/test.js").getFile().substring(1), engine);
         Invocable inv = (Invocable) engine;
+        String food = "rice, noodles, dumplings", words = "hello script engine !!";
+        Object person = engine.get("person");
+        inv.invokeMethod(person, "eat", food);
+        inv.invokeMethod(person, "speak", words);
+        System.out.println(inv.invokeFunction("add", 4, 5));
 
+    }
+
+    @Test
+    public void interfaces() throws ScriptException {
+
+        ScriptEngine engine = ScriptingKit.nasHornEngine();
+        engine.eval(String.format("load('%s')", this.getClass().getResource("/javascript/interface.js").getFile().substring(1)));
+
+        Invocable invocable = (Invocable) engine;
+        Interface impl = invocable.getInterface(Interface.class);
+        //同名函数,取最后定义的一个
+        Optional.ofNullable(impl).ifPresent(ths -> System.out.println(ths.add(2, 4, 5)));
+    }
+
+    @Test
+    public void complied() {
+
+        ScriptEngine engine = ScriptingKit.nasHornEngine();
+        Optional.ofNullable(engine).filter(ths -> ths instanceof Compilable).ifPresent(ths -> {
+            Compilable comp = (Compilable) engine;
+
+            try {
+                CompiledScript cScript = comp.compile("print(n1 + n2)");
+
+                Bindings scriptParams = engine.createBindings();
+                scriptParams.put("n1", 2);
+                scriptParams.put("n2", 3);
+                cScript.eval(scriptParams);
+
+                scriptParams.put("n1", 9);
+                scriptParams.put("n2", 7);
+                cScript.eval(scriptParams);
+            } catch (ScriptException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void javaInScript() throws ScriptException {
+
+        ScriptEngine engine = ScriptingKit.nasHornEngine();
+        engine.eval(String.format("load('%s')",
+                this.getClass().getResource("/javascript/java.js").getFile().substring(1)));
+
+    }
+
+    @Test
+    public void importJavaClass() throws ScriptException {
+
+        ScriptEngine engine = ScriptingKit.nasHornEngine();
+        engine.eval(String.format("load('%s')",
+                this.getClass().getResource("/javascript/import_java.js").getFile().substring(1)));
+        LocalDate date = LocalDate.now();
     }
 }
