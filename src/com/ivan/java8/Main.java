@@ -110,6 +110,7 @@ public class Main {
         System.out.println(Charset.forName("UTF-8").toString());
 
         "abc".chars().forEach(c -> System.out.println((char) c));
+
     }
 
 }

@@ -1,6 +1,9 @@
 package com.ivan.java8.collection.map;
 
+import com.ivan.java8.kit.StringKit;
 import org.junit.Test;
+
+import javax.activation.ActivationDataFlavor;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -101,4 +104,20 @@ public class MapNewly {
         map.putIfAbsent("a", "33");
         System.out.println(map);
     }
+
+    @Test
+    public void sortByEntryComparator() {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("1", "4");
+        map.put("2", "2");
+        map.put("3", "43");
+        map.put("5", "65");
+        map.put("0", "7");
+        map.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+        System.out.println(StringKit.divide);
+        map.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+
+    }
+
 }
