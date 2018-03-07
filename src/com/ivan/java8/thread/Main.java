@@ -12,8 +12,23 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.out.println(asynchronous());
-        Thread.sleep(20* 1000);
+//        System.out.println(asynchronous());
+//        Thread.sleep(20* 1000);
+
+        Runnable runnable = () -> {
+            try {
+                Thread.sleep(1000 * 3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(StringKit.divide);
+        };
+        ExecutorService service = Executors.newCachedThreadPool();
+        FutureTask<Integer> task = new FutureTask<>(runnable, 0);
+        service.submit(runnable);
+        System.out.println("-----------------------");
+        Thread.sleep(1000 * 10);
+
     }
 
     private static String asynchronous() throws InterruptedException {

@@ -1,10 +1,10 @@
 package com.ivan.java8.kit;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -63,4 +63,39 @@ public class DateKit {
         return getLastDayOfWeek(LocalDate.now());
     }
 
+    public static LocalDateTime getLocalDateTimeByMillis(long millis) {
+
+        return getInstantByMillis(millis).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    public static Instant getInstantByMillis(long millis) {
+
+        return Instant.ofEpochMilli(millis);
+    }
+
+    public static Date localDateTime2Date(LocalDateTime time) {
+
+        return Optional.ofNullable(time).map(thsTime -> Date.from(time.atZone(ZoneId.systemDefault()).toInstant())).orElse(null);
+    }
+
+    public static Date localDate2Date(LocalDate date) {
+
+        return Optional.ofNullable(date).map(thsDate -> localDateTime2Date(date.atTime(0, 0, 0))).orElse(null);
+    }
+
+
+    public static LocalDateTime date2LocalDateTime(Date date) {
+
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    public static LocalDate date2LocalDate(Date date) {
+
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public static LocalTime date2LocalTime(Date date) {
+
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+    }
 }
