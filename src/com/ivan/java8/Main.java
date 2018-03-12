@@ -1,5 +1,6 @@
 package com.ivan.java8;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ivan.java8.function.FunInterface;
@@ -10,6 +11,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.*;
 
@@ -111,6 +115,27 @@ public class Main {
 
         "abc".chars().forEach(c -> System.out.println((char) c));
 
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void test2() throws IOException {
+
+        Path path = Paths.get("C:\\Users\\feifan.gou\\Desktop\\download\\increase_copper_cache.backup");
+
+        String strJson = new String(Files.readAllBytes(path));
+        Map<Integer,List<Long>> map = JSONObject.parseObject(strJson, Map.class);
+
+        map.forEach((key, value) -> System.out.println(key + "==>" + value.size()));
+
+        /*
+         *
+         402==>90
+359==>121
+392==>157
+394==>146
+395==>142
+         */
     }
 
 }
