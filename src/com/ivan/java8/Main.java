@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
@@ -83,12 +84,15 @@ public class Main {
     @SuppressWarnings("unchecked")
     public void test2() throws IOException {
 
-        Path path = Paths.get("C:\\Users\\feifan.gou\\Desktop\\download\\increase_copper_cache.backup");
+//        Path path = Paths.get("C:\\Users\\feifan.gou\\Desktop\\download\\increase_copper_cache.backup");
+//
+//        String strJson = new String(Files.readAllBytes(path));
+//        Map<Integer,List<Long>> map = JSONObject.parseObject(strJson, Map.class);
+//
+//        map.forEach((key, value) -> System.out.println(key + "==>" + value.size()));
 
-        String strJson = new String(Files.readAllBytes(path));
-        Map<Integer,List<Long>> map = JSONObject.parseObject(strJson, Map.class);
-
-        map.forEach((key, value) -> System.out.println(key + "==>" + value.size()));
+        LocalDate date = LocalDate.now().minusDays(30);
+        System.out.println(date);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.ivan.java8.scripting;
 
-import com.ivan.java8.Interface;
 import com.ivan.java8.kit.ScriptingKit;
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
