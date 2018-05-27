@@ -75,7 +75,7 @@ public class CollectorsLearn {
     @Test
     public void counting() {
 
-        java.util.stream.Stream<String> stringStream = java.util.stream.Stream.of("1", "2", "3");
+        Stream<String> stringStream = Stream.of("1", "2", "3");
 
         System.out.println(stringStream.collect(Collectors.counting()));
 
@@ -92,7 +92,7 @@ public class CollectorsLearn {
     @Test
     public void toSet() {
 
-        java.util.stream.Stream<String> stringStream = Stream.of("1", "1", "2", "3", "3");
+        Stream<String> stringStream = Stream.of("1", "1", "2", "3", "3");
 
         System.out.println(stringStream.collect(Collectors.toSet()));
     }
@@ -111,7 +111,7 @@ public class CollectorsLearn {
     @Test
     public void maxBy_minBy() {
 
-        java.util.stream.Stream<String> stringStream = Stream.of("a", "c", "g", "v", "b");
+        Stream<String> stringStream = Stream.of("a", "c", "g", "v", "b");
 //        Optional<String> maxOptional = stringStream.collect(Collectors.maxBy(Comparator.reverseOrder()));
 //        maxOptional.ifPresent(System.out::println);
         Optional<String> minOptional = stringStream.collect(Collectors.minBy(Comparator.reverseOrder()));

@@ -150,7 +150,7 @@ public class StreamLearn {
     public void reduce() {
 
         List<String> stringList = Lists.newArrayList("a", "b", "c", "d", "e", "f", "g");
-        java.util.stream.Stream<String> stringStream = stringList.stream();
+        Stream<String> stringStream = stringList.stream();
         { // param_type 1 : BinaryOperator
             Optional<String> reduceBinaryOperator = stringStream.reduce((first, second) -> {
                 System.out.println(first);
@@ -202,7 +202,7 @@ public class StreamLearn {
       由并行转化成串行
      */
     public void sequential() {
-        java.util.stream.Stream<String> stream = Arrays.stream(new String[]{"1", "3", "4"});
+        Stream<String> stream = Arrays.stream(new String[]{"1", "3", "4"});
         System.out.println(stream.sequential().collect(Collectors.toList()));
     }
 
