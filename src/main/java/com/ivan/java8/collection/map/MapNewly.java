@@ -3,9 +3,7 @@ package com.ivan.java8.collection.map;
 import com.ivan.java8.kit.StringKit;
 import org.junit.Test;
 
-import javax.activation.ActivationDataFlavor;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -15,7 +13,7 @@ import java.util.Map;
 public class MapNewly {
 
     private Map<String, String> map = new HashMap<String, String>() {{
-        put("a", "");
+        put("a", "a");
         put("b", "2");
         put("c", "3");
         put("d", "4");
@@ -45,6 +43,22 @@ public class MapNewly {
     }
 
     /**
+     * 替换所有，根据定义的BiFunction函数
+     */
+    @Test
+    public void replaceAll() {
+
+        map.replaceAll((key, value) -> {
+
+            System.out.printf("key = %s, value = %s",key, value);
+            return key + " === " + value;
+        });
+
+        System.out.println();
+        System.out.println(map);
+    }
+
+    /**
      * 如果值也符合,才remove
      */
     @Test
@@ -65,12 +79,16 @@ public class MapNewly {
         System.out.println(map);
     }
 
+    /**
+     * 根据key找到旧的value，然后对旧值进行操作
+     */
     @Test
     public void merge() {
 
         System.out.println(map.get("a"));
         map.merge("a", "2", (oldValue, param) -> oldValue + param);
         System.out.println(map.get("a"));
+//        map.compute()
     }
 
     /**
@@ -91,13 +109,16 @@ public class MapNewly {
     @Test
     public void computeIfPresent() {
 
-//        map.put("computeIfPresent", null);
-        map.put("computeIfPresent", "computeIfPresent");
+        map.put("computeIfPresent", null);
+//        map.put("computeIfPresent", "computeIfPresent");
         map.computeIfPresent("computeIfPresent", (key, value) -> key + " ====== " + value);
         System.out.println(map);
 
     }
 
+    /**
+     * value为null 或者key不存在，都会put进去
+     */
     @Test
     public void putIfAbsent() {
 
@@ -119,5 +140,18 @@ public class MapNewly {
         map.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 
     }
+
+    @Test
+    public void compute() {
+
+        map.compute("a", (key, value) -> {
+            System.out.printf("key = %s\r", key);
+            System.out.printf("value = %s\r", value);
+            return key + " === " + value;
+        });
+
+        System.out.println(map);
+    }
+
 
 }
