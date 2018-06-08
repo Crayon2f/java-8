@@ -37,8 +37,8 @@ public class CollectorsLearn {
         //param_type 2 : keyMapper, valueMapper, marginFunction(弥补param_type 1,重复key会报 'Duplicate key' 的错误，当有重复key 时候，会调用merge方法，具体怎么合并，
         // 就是mergeFunction里面的内容，如果没有重复的key，则不执行marginFunction )
 //        Map<String, String> mergeMap = Article.data.stream().collect(Collectors.toMap(
-//                article -> Optional.ofNullable(article.getAuthor()).orElse(""),
 //                article -> Optional.ofNullable(article.getTitle()).orElse(""),
+//                article -> Optional.ofNullable(article.getAuthor()).orElse(""),
 //                (oldValue, newValue) -> {
 //                    System.out.println("same key ++++++ "+oldValue + " = " + newValue);
 //                    return oldValue + newValue;
@@ -101,8 +101,8 @@ public class CollectorsLearn {
     @Test
     public void mapping() {
 
-        Map<String, String> collect = Article.data.stream().collect(Collectors.groupingBy(Article::getAuthor,
-                Collectors.mapping(Article::getTitle,
+        Map<String, String> collect = Article.data.stream().collect(Collectors.groupingBy(Article::getTitle,
+                Collectors.mapping(Article::getAuthor,
                         Collectors.joining("|"))));
         System.out.println(collect);
     }
@@ -125,12 +125,12 @@ public class CollectorsLearn {
     @Test
     public void collectingAndThen() {
 
-        Map<String, String> map = Article.data.stream().collect(
-                Collectors.collectingAndThen(Collectors.groupingBy(Article::getAuthor, Collectors.mapping(Article::getTitle, Collectors.joining(","))), result -> {
-                    result.putIfAbsent("result", "aa");
-                    return Collections.unmodifiableMap(new TreeMap<>(result));
-                }));
+//        Map<String, String> map = Article.data.stream().collect(
+//                Collectors.collectingAndThen(Collectors.groupingBy(Article::getAuthor, Collectors.mapping(Article::getTitle, Collectors.joining(","))), result -> result));
 
+        Map<Employee.Gender, String> map = Employee.persons().stream().collect(
+                Collectors.collectingAndThen(Collectors.groupingBy(Employee::getGender, Collectors.mapping(Employee::getName, Collectors.joining(","))), result -> result)
+        );
         System.out.println(map);
     }
 

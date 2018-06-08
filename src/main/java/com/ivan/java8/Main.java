@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ivan.java8.function.FunInterface;
 import com.ivan.java8.kit.StringKit;
+import com.ivan.java8.pojo.Article;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -17,6 +18,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -93,6 +95,10 @@ public class Main {
 
         LocalDate date = LocalDate.now().minusDays(30);
         System.out.println(date);
+
+//        Collectors.groupingBy()
+        Map<Boolean, String> map = Article.data.stream().collect(Collectors.partitioningBy(article -> article.getCount() == 0,
+                Collectors.mapping(Article::getTitle, Collectors.joining())));
     }
 
 }

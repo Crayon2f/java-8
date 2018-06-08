@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Employee {
-    public static enum Gender {
+    public enum Gender {
         MALE, FEMALE
     }
 

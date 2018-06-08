@@ -156,9 +156,9 @@ public class StreamLearn {
                 System.out.println(first);
                 System.out.println(second);
                 System.out.println("==================");
-                if (second.equals("c")) {
-                    throw new RuntimeException();
-                }
+//                if (second.equals("c")) {
+//                    throw new RuntimeException();
+//                }
                 return first + second;
             });
             reduceBinaryOperator.ifPresent(System.out::println);
@@ -219,7 +219,7 @@ public class StreamLearn {
     }
 
     @Test
-    public void test() {
+    public void mapForEach() {
 
         List<String> stringList = Lists.newArrayList();
         Map<String, List<Article>> collect = Article.data.parallelStream().peek(article -> {
@@ -231,5 +231,26 @@ public class StreamLearn {
             System.out.println("key = " + key);
             System.out.println("value = " + value.parallelStream().count());
         });
+    }
+
+    @Test
+    public void distinct() {
+
+        System.out.println(Article.data.stream().distinct().map(Article::getAuthor).collect(Collectors.toList()));
+    }
+
+    @Test
+    public void toArray() {
+
+        Integer[] integers = Article.data.stream().map(Article::getCount).toArray(Integer[]::new);
+        System.out.println(Arrays.toString(integers));
+
+    }
+
+    @Test
+    public void test2() {
+
+        List<Integer> integerList = Arrays.stream(new String[]{"4", "5", "66"}).map(Integer::parseInt).collect(Collectors.toList());
+        System.out.println(integerList);
     }
 }
