@@ -33,7 +33,7 @@ public class Main {
     }
 
     @Test
-    public void extendsThread() throws InterruptedException {
+    public void extendsThread() {
 
         MyThread thread = new MyThread();
         thread.run();

@@ -6,8 +6,12 @@ import com.google.common.collect.Maps;
 import com.ivan.java8.function.FunInterface;
 import com.ivan.java8.kit.StringKit;
 import com.ivan.java8.pojo.Article;
+import lombok.SneakyThrows;
 import org.junit.Test;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -99,6 +103,18 @@ public class Main {
 //        Collectors.groupingBy()
         Map<Boolean, String> map = Article.data.stream().collect(Collectors.partitioningBy(article -> article.getCount() == 0,
                 Collectors.mapping(Article::getTitle, Collectors.joining())));
+
+    }
+
+
+    @Test
+    @SneakyThrows
+    public void jse() {
+
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("javascript");
+        Object eval = engine.eval("(12+34.0+0.98-34)");
+        System.out.println(eval);
+
     }
 
 }

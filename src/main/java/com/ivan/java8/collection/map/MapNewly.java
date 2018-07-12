@@ -1,8 +1,11 @@
 package com.ivan.java8.collection.map;
 
 import com.ivan.java8.kit.StringKit;
+import com.sun.istack.internal.NotNull;
+import lombok.NonNull;
 import org.junit.Test;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +16,7 @@ import java.util.Map;
 public class MapNewly {
 
     private Map<String, String> map = new HashMap<String, String>() {{
-        put("a", "a");
+        put("a", null);
         put("b", "2");
         put("c", "3");
         put("d", "4");
@@ -81,11 +84,13 @@ public class MapNewly {
 
     /**
      * 根据key找到旧的value，然后对旧值进行操作
+     *  key value 均为非空,如果传null,则会报 NPE
      */
     @Test
     public void merge() {
 
         System.out.println(map.get("a"));
+        map.merge("a", null, (oldValue, param) -> oldValue + param);
         map.merge("a", "2", (oldValue, param) -> oldValue + param);
         System.out.println(map.get("a"));
 //        map.compute()
@@ -152,6 +157,5 @@ public class MapNewly {
 
         System.out.println(map);
     }
-
 
 }
