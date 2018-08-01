@@ -2,8 +2,8 @@ package com.ivan.java8.google;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
-import com.ivan.java8.pojo.Article;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Article;
+import org.junit.jupiter.api.Test;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 /**
  * Created by feiFan.gou on 2017/12/8 11:57.
  */
-public class GuavaComparator {
+class GuavaComparator {
 
     @Test
-    public void ordering() {
+    void ordering() {
 
         List<String> list = Lists.newArrayList();
         list.add("neron");

@@ -1,15 +1,13 @@
 package com.ivan.java8.stream;
 
+import com.crayon2f.common.pojo.Article;
 import com.ivan.java8.kit.StringKit;
-import com.ivan.java8.pojo.Article;
-import com.ivan.java8.pojo.Employee;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Employee;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -17,13 +15,13 @@ import java.util.stream.Stream;
 /**
  * Created by feiFan.gou on 2018/2/9 10:18.
  */
-public class Operation {
+class Operation {
 
     /**
      * 在每消费一个流之前,偷偷提前消费。
      */
     @Test
-    public void peek() {
+    void peek() {
 
         int sum = Stream.of(1, 2, 3, 4, 5)
                 .peek(e -> System.out.println("Taking integer: " + e))
@@ -39,7 +37,7 @@ public class Operation {
      * 消费
      */
     @Test
-    public void forEach() {
+    void forEach() {
     }
 
 
@@ -47,7 +45,7 @@ public class Operation {
      * 过滤器
      */
     @Test
-    public void filter() {
+    void filter() {
 
         Article.data.stream().filter(Article::getWhetherPrivate).forEach(System.out::println);
     }
@@ -56,7 +54,7 @@ public class Operation {
      * You can apply the map operation on a stream using one of the following methods of the Stream<T> interface
      */
     @Test
-    public void map() {
+    void map() {
 
         IntStream.rangeClosed(1, 5).map(n -> n * n).forEach(System.out::println); //1~5
         IntStream.range(1, 5).map(n -> n * n).forEach(System.out::println); // 1~4
@@ -69,7 +67,7 @@ public class Operation {
      * Streams flatMap（）支持一对多映射。它将每个元素映射到一个流，然后将流的流化成流。
      */
     @Test
-    public void flatMap() {
+    void flatMap() {
 
         Stream.of(1, 22, 333, 4444).flatMap(integer -> {
             Stream<String> stringStream = Stream.<String>builder().add("dd").add("ddcc").add("ddf").build();
@@ -111,7 +109,7 @@ public class Operation {
 
 
     @Test
-    public void reduce() {
+    void reduce() {
 
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
         int sum = numbers.stream()
@@ -166,7 +164,7 @@ public class Operation {
      * 聚合
      */
     @Test
-    public void aggregation() {
+    void aggregation() {
 
         double sum = Employee.persons()
                 .stream()
@@ -182,7 +180,7 @@ public class Operation {
     }
 
     @Test
-    public void toMap() {
+    void toMap() {
 
         Employee.persons().stream()
                 .collect(Collectors.toMap(
@@ -196,7 +194,7 @@ public class Operation {
     }
 
     @Test
-    public void test() {
+    void test() {
 
 //        Article.data.parallelStream().forEachOrdered(article -> {
 //            System.out.println(String.format("thread-name : %s", Thread.currentThread().getName()));

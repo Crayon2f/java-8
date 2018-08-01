@@ -1,13 +1,13 @@
 package com.ivan.java8.collection.sort;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-public class SortLearn {
+class SortLearn {
 
     @Test
-    public void testInsertSort() {
+    void testInsertSort() {
 
         int array[] = {200, 5, 6, 100, 4, 3, 1, 8};
 //        insertSort(array);

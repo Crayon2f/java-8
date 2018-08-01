@@ -1,6 +1,6 @@
 package com.ivan.java8.collection.array;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 /**
  * Created by feiFan.gou on 2017/12/26 19:39.
  */
-public class ArrayNewly {
+class ArrayNewly {
 
     @Test
-    public void sort() {
+    void sort() {
 
         String[] strArr = new String[]{"kdn", "ad", "nn34", "ddsd", "dfd", "sssssssccd"};
 
@@ -28,7 +28,7 @@ public class ArrayNewly {
     }
 
     @Test
-    public void splIterator() {
+    void splIterator() {
 
         // Create an array list for doubles.
         ArrayList<Integer> al = new ArrayList<>();
@@ -81,7 +81,7 @@ public class ArrayNewly {
      * 计数排序
      */
     @Test
-    public void countingSort() {
+    void countingSort() {
 
         int max = 8;
         int[] a = new int[]{2, 1, 4, 5, 7, 2, 6};
@@ -101,7 +101,7 @@ public class ArrayNewly {
     }
 
     @Test
-    public void insertionSort() {
+    void insertionSort() {
 
         int[] a = new int[]{2, 1, 4, 5, 3, 2, 6};
         for (int i = 0, j = i; i < a.length - 1; j = ++i) {

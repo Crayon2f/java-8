@@ -26,14 +26,6 @@ public class StringKit {
         return !isEmpty(string);
     }
 
-    public static String join(String sign, final String... params) {
-
-        StringBuilder sb = new StringBuilder();
-        for (String s : params)
-            sb.append(sign).append(s);
-        return sb.substring(1);
-    }
-
     public static String trim(String string) {
 
         return Optional.ofNullable(string).map(String::trim).orElse(empty);

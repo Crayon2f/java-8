@@ -1,6 +1,6 @@
 package com.ivan.java8.optional;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.OptionalInt;
 
@@ -8,10 +8,10 @@ import java.util.OptionalInt;
  * Created by feiFan.gou on 2018/1/29 16:22.
  * 个人感觉很鸡肋
  */
-public class OptionGeneric {
+class OptionGeneric {
 
     @Test
-    public void test() {
+    void test() {
 
         int i = 0;
         System.out.println(OptionalInt.of(i).orElseGet(() -> {

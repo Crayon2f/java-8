@@ -3,9 +3,9 @@ package com.ivan.java8.stream;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ivan.java8.kit.StringKit;
-import com.ivan.java8.pojo.Article;
-import com.ivan.java8.pojo.Employee;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Article;
+import com.crayon2f.common.pojo.Employee;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,11 +14,11 @@ import java.util.stream.Stream;
 /**
  * Created by feiFan.gou on 2017/10/14 17:16.
  */
-public class StreamLearn {
+class StreamLearn {
 
 
     @Test
-    public void sort() {
+    void sort() {
 
         List<Article> sortList = Article.data.stream().sorted(Comparator.comparing(Article::getCount)).collect(Collectors.toList());
 
@@ -32,7 +32,7 @@ public class StreamLearn {
     }
 
     @Test
-    public void filter() {
+    void filter() {
 
         List<Article> filterList = Article.data.stream().filter(article -> null != article.getAuthor() && article.getAuthor().length() == 4).collect(Collectors.toList());
 
@@ -40,7 +40,7 @@ public class StreamLearn {
     }
 
     @Test
-    public void map() {
+    void map() {
 
         List<String> mapList = Article.data.stream().map(article -> {
             String author = StringKit.trim(article.getAuthor());
@@ -57,7 +57,7 @@ public class StreamLearn {
      * 和map类似，不同的是其每个元素转换得到的是Stream对象，会把子Stream中的元素压缩到父集合中；
      */
     @Test
-    public void flatMap() {
+    void flatMap() {
 
         List<Integer> countList = Article.data.stream().flatMap(article -> { //继续对父级进行操作后,再进行其他操作
             article.setCount(23);
@@ -72,7 +72,7 @@ public class StreamLearn {
      * 新Stream每个元素被消费的时候都会执行给定的消费函数,不会消费流；
      */
     @Test
-    public void peek() {
+    void peek() {
 
         int number = Stream.of(1,2,3,4,5).peek(e -> System.out.println("Taking integer: " + e))
                 .filter(n -> n % 2 == 1)
@@ -83,13 +83,13 @@ public class StreamLearn {
     }
 
     @Test
-    public void limit() {
+    void limit() {
 
         System.out.println(Article.data.stream().limit(3).collect(Collectors.toList()));
     }
 
     @Test
-    public void skip() {
+    void skip() {
 
         System.out.println(Article.data.stream().skip(9).collect(Collectors.toList()));
 
@@ -99,7 +99,7 @@ public class StreamLearn {
     }
 
     @Test
-    public void mapToInt() {
+    void mapToInt() {
 
         Map<String, String> map = Maps.newHashMap();
         map.put("1", "a");
@@ -117,7 +117,7 @@ public class StreamLearn {
      * findAny : stream()时,与findFirst一样,获取第一个;但是当是parallelStream()时候,获得随机
      */
     @Test
-    public void find() {
+    void find() {
 
 //        List<String> stringList = Collections.checkedList()
         List<String> stringList = Lists.newArrayList();
@@ -147,7 +147,7 @@ public class StreamLearn {
     }
 
     @Test
-    public void reduce() {
+    void reduce() {
 
         List<String> stringList = Lists.newArrayList("a", "b", "c", "d", "e", "f", "g");
         Stream<String> stringStream = stringList.stream();
@@ -201,13 +201,13 @@ public class StreamLearn {
     /*
       由并行转化成串行
      */
-    public void sequential() {
+    void sequential() {
         Stream<String> stream = Arrays.stream(new String[]{"1", "3", "4"});
         System.out.println(stream.sequential().collect(Collectors.toList()));
     }
 
     @Test
-    public void match() {
+    void match() {
 
         System.out.println(Employee.persons().stream().anyMatch(Employee::isMale));
         System.out.println(Employee.persons().stream().noneMatch(Employee::isMale));
@@ -219,7 +219,7 @@ public class StreamLearn {
     }
 
     @Test
-    public void mapForEach() {
+    void mapForEach() {
 
         List<String> stringList = Lists.newArrayList();
         Map<String, List<Article>> collect = Article.data.parallelStream().peek(article -> {
@@ -234,13 +234,13 @@ public class StreamLearn {
     }
 
     @Test
-    public void distinct() {
+    void distinct() {
 
         System.out.println(Article.data.stream().distinct().map(Article::getAuthor).collect(Collectors.toList()));
     }
 
     @Test
-    public void toArray() {
+    void toArray() {
 
         Integer[] integers = Article.data.stream().map(Article::getCount).toArray(Integer[]::new);
         System.out.println(Arrays.toString(integers));
@@ -248,7 +248,7 @@ public class StreamLearn {
     }
 
     @Test
-    public void test2() {
+    void test2() {
 
         List<Integer> integerList = Arrays.stream(new String[]{"4", "5", "66"}).map(Integer::parseInt).collect(Collectors.toList());
         System.out.println(integerList);

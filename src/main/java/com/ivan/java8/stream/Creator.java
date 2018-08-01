@@ -1,7 +1,7 @@
 package com.ivan.java8.stream;
 
 import com.google.common.collect.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,10 +17,10 @@ import java.util.stream.Stream;
  * Created by feiFan.gou on 2018/2/9 10:16.
  * stream 的生成
  */
-public class Creator {
+class Creator {
 
     @Test
-    public void creator() {
+    void creator() {
 
         // 1.Create Streams from Values
         Stream.of("a", "b", "c").forEach(System.out::println);

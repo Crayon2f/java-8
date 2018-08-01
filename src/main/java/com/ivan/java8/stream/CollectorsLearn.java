@@ -1,12 +1,17 @@
 package com.ivan.java8.stream;
 
+import com.crayon2f.common.pojo.enums.Gender;
 import com.google.common.collect.Maps;
 import com.ivan.java8.kit.StringKit;
-import com.ivan.java8.pojo.Article;
-import com.ivan.java8.pojo.Employee;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Article;
+import com.crayon2f.common.pojo.Employee;
+import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.LongSummaryStatistics;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -14,10 +19,10 @@ import java.util.stream.Stream;
 /**
  * Created by feiFan.gou on 2018/1/2 15:50.
  */
-public class CollectorsLearn {
+class CollectorsLearn {
 
     @Test
-    public void toList() {
+    void toList() {
 
         List<String> titleList = Article.data.parallelStream()
                 .filter(article -> StringKit.isNotEmpty(article.getTitle())).map(Article::getTitle).collect(Collectors.toList());
@@ -25,7 +30,7 @@ public class CollectorsLearn {
     }
 
     @Test
-    public void toMap() {
+    void toMap() {
 
         // param_type 1 : keyMapper, valueMapper （key不能重复，value不能为null）
 //        Map<String, String> stringMap = Article.data.parallelStream().collect(Collectors.toMap(article ->  Optional.ofNullable(article.getAuthor()).orElse("")
@@ -65,7 +70,7 @@ public class CollectorsLearn {
 
 
     @Test
-    public void groupingBy() {
+    void groupingBy() {
 
         Map<String, List<Article>> collect = Article.data.parallelStream().collect(Collectors.groupingBy(article -> Optional.ofNullable(article.getAuthor()).orElse("")));
         collect.forEach((key, value) -> System.out.println(key + " = " + value.size()));
@@ -73,7 +78,7 @@ public class CollectorsLearn {
     }
 
     @Test
-    public void counting() {
+    void counting() {
 
         Stream<String> stringStream = Stream.of("1", "2", "3");
 
@@ -82,7 +87,7 @@ public class CollectorsLearn {
     }
 
     @Test
-    public void joining() {
+    void joining() {
 
         IntStream parallel = IntStream.range(0, 3000).parallel();
         Stream<String> stringStream = parallel.mapToObj(String::valueOf).parallel();
@@ -90,7 +95,7 @@ public class CollectorsLearn {
     }
 
     @Test
-    public void toSet() {
+    void toSet() {
 
         Stream<String> stringStream = Stream.of("1", "1", "2", "3", "3");
 
@@ -99,7 +104,7 @@ public class CollectorsLearn {
 
 
     @Test
-    public void mapping() {
+    void mapping() {
 
         Map<String, String> collect = Article.data.stream().collect(Collectors.groupingBy(Article::getTitle,
                 Collectors.mapping(Article::getAuthor,
@@ -109,7 +114,7 @@ public class CollectorsLearn {
 
 
     @Test
-    public void maxBy_minBy() {
+    void maxBy_minBy() {
 
         Stream<String> stringStream = Stream.of("a", "c", "g", "v", "b");
 //        Optional<String> maxOptional = stringStream.collect(Collectors.maxBy(Comparator.reverseOrder()));
@@ -123,12 +128,12 @@ public class CollectorsLearn {
      * collecting 之后,再操作
      */
     @Test
-    public void collectingAndThen() {
+    void collectingAndThen() {
 
 //        Map<String, String> map = Article.data.stream().collect(
 //                Collectors.collectingAndThen(Collectors.groupingBy(Article::getAuthor, Collectors.mapping(Article::getTitle, Collectors.joining(","))), result -> result));
 
-        Map<Employee.Gender, String> map = Employee.persons().stream().collect(
+        Map<Gender, String> map = Employee.persons().stream().collect(
                 Collectors.collectingAndThen(Collectors.groupingBy(Employee::getGender, Collectors.mapping(Employee::getName, Collectors.joining(","))), result -> result)
         );
         System.out.println(map);
@@ -139,7 +144,7 @@ public class CollectorsLearn {
      * 分区
      */
     @Test
-    public void partitioningBy() {
+    void partitioningBy() {
 
         // 默认以true false分区, 返回分区实体集合
         Map<Boolean, List<Employee>> collect = Employee.persons().stream().collect(Collectors.partitioningBy(Employee::isMale));
@@ -158,7 +163,7 @@ public class CollectorsLearn {
     }
 
     @Test
-    public void averaging() {
+    void averaging() {
 
 //        Stream<String> stringStream = StreamLearn.of("1.4","2.4","3.5"); // double 值
 //        Stream<String> stringStream = StreamLearn.of("1","2","3"); //int 值
@@ -174,7 +179,7 @@ public class CollectorsLearn {
      * 返回 SummaryStatistics 统计
      */
     @Test
-    public void summarizing() {
+    void summarizing() {
 
         Stream<String> stringStream = Stream.of("1","2","3");
 
@@ -190,7 +195,7 @@ public class CollectorsLearn {
     }
 
     @Test
-    public void summing() {
+    void summing() {
 
         Stream<String> stringStream = Stream.of("1","2","3");
         Integer collect = stringStream.collect(Collectors.summingInt(Integer::parseInt));
@@ -199,9 +204,4 @@ public class CollectorsLearn {
         // double,long 同上 summingDouble summingLong
     }
 
-    @Test
-    public void test() {
-
-
-    }
 }

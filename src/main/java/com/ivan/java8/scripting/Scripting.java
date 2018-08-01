@@ -2,8 +2,8 @@ package com.ivan.java8.scripting;
 
 import com.ivan.java8.kit.ScriptingKit;
 import com.ivan.java8.kit.StringKit;
-import com.ivan.java8.pojo.Article;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Article;
+import org.junit.jupiter.api.Test;
 
 import javax.script.*;
 import java.io.File;
@@ -23,10 +23,10 @@ import static javax.script.ScriptContext.GLOBAL_SCOPE;
 /**
  * Created by feiFan.gou on 2018/2/12 10:15.
  */
-public class Scripting {
+class Scripting {
 
     @Test
-    public void helloWorld() throws ScriptException {
+    void helloWorld() throws ScriptException {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -35,7 +35,7 @@ public class Scripting {
     }
 
     @Test
-    public void availableEngines() {
+    void availableEngines() {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         List<ScriptEngineFactory> engineFactories = manager.getEngineFactories();
@@ -51,7 +51,7 @@ public class Scripting {
     }
 
     @Test
-    public void findOutTheSyntax() throws ScriptException {
+    void findOutTheSyntax() throws ScriptException {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine javascript = manager.getEngineByName("javascript");
@@ -62,14 +62,14 @@ public class Scripting {
     }
 
     @Test
-    public void output() throws ScriptException {
+    void output() throws ScriptException {
 
         ScriptEngine engine = ScriptingKit.javascriptEngine();
         engine.eval("print('hello','world')");
     }
 
     @Test
-    public void write2File() {
+    void write2File() {
 
         ScriptEngine engine = ScriptingKit.javascriptEngine();
         File file = new File(this.getClass().getResource("/text.txt").getFile());
@@ -87,7 +87,7 @@ public class Scripting {
     }
 
     @Test
-    public void runJavascriptFromJsFile() {
+    void runJavascriptFromJsFile() {
 
         String jsFile = this.getClass().getResource("/javascript/test.js").getFile().substring(1);
         Path path = Paths.get(jsFile);
@@ -103,7 +103,7 @@ public class Scripting {
 
     @Test
     //returns the last value in the script as an Object
-    public void eval() throws ScriptException {
+    void eval() throws ScriptException {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         Object result;
@@ -121,7 +121,7 @@ public class Scripting {
     }
 
     @Test
-    public void transmitParam() throws ScriptException {
+    void transmitParam() throws ScriptException {
 
         Article article = new Article("标题4", "作者1", 12);
         ScriptEngine engine = ScriptingKit.nasHornEngine();
@@ -131,7 +131,7 @@ public class Scripting {
     }
 
     @Test
-    public void rubyEngine() {
+    void rubyEngine() {
 
         ScriptEngine engine = ScriptingKit.javascriptEngine();
         engine.put("msg", "this is a ruby script");
@@ -140,7 +140,7 @@ public class Scripting {
     }
 
     @Test
-    public void engineGet() {
+    void engineGet() {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         ScriptingKit.runJsFile(this.getClass().getResource("/javascript/test.js").getFile().substring(1), engine, null);
@@ -150,7 +150,7 @@ public class Scripting {
     }
 
     @Test
-    public void buildings() {
+    void buildings() {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         Bindings bindings = engine.createBindings();
@@ -167,7 +167,7 @@ public class Scripting {
         引擎范围的优先级高于全局范围。
      */
     @Test
-    public void context() throws ScriptException{
+    void context() throws ScriptException{
 
         ScriptContext context = new SimpleScriptContext();
         context.setAttribute("name", "jack", ENGINE_SCOPE);
@@ -202,7 +202,7 @@ public class Scripting {
     }
 
     @Test
-    public void runJsByLoad() throws ScriptException {
+    void runJsByLoad() throws ScriptException {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         ScriptingKit.runJsFile(this.getClass().getResource("/javascript/test.js").getFile().substring(1), engine);
@@ -214,7 +214,7 @@ public class Scripting {
      * 有点像反射
      */
     @Test
-    public void callJsFunction() throws ScriptException, NoSuchMethodException {
+    void callJsFunction() throws ScriptException, NoSuchMethodException {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         ScriptingKit.runJsFile(this.getClass().getResource("/javascript/test.js").getFile().substring(1), engine);
@@ -228,7 +228,7 @@ public class Scripting {
     }
 
     @Test
-    public void interfaces() throws ScriptException {
+    void interfaces() throws ScriptException {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         engine.eval(String.format("load('%s')", this.getClass().getResource("/javascript/interface.js").getFile().substring(1)));
@@ -240,7 +240,7 @@ public class Scripting {
     }
 
     @Test
-    public void complied() {
+    void complied() {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         Optional.ofNullable(engine).filter(ths -> ths instanceof Compilable).ifPresent(ths -> {
@@ -264,7 +264,7 @@ public class Scripting {
     }
 
     @Test
-    public void javaInScript() throws ScriptException {
+    void javaInScript() throws ScriptException {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         engine.eval(String.format("load('%s')",
@@ -273,7 +273,7 @@ public class Scripting {
     }
 
     @Test
-    public void importJavaClass() throws ScriptException {
+    void importJavaClass() throws ScriptException {
 
         ScriptEngine engine = ScriptingKit.nasHornEngine();
         engine.eval(String.format("load('%s')",

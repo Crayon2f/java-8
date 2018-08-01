@@ -3,8 +3,8 @@ package com.ivan.java8.function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.ivan.java8.pojo.Article;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Article;
+import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,10 +23,10 @@ import java.util.regex.Pattern;
  * <p>
  * Created by feiFan.gou on 2017/8/15 18:33.
  */
-public class Function {
+class Function {
 
     @Test
-    public void function() {
+    void function() {
 
         java.util.function.Function<List<String>, String> function = (x) -> {
             x.forEach(System.out::println); //当放只有一个参数,且,参数类型刚好是Function中参数T的类型,可使用lambda表达式Object::method,且不用写参数
@@ -61,7 +61,7 @@ public class Function {
      * Consumer<T>——接收T对象，不返回值
      */
     @Test
-    public void consumer() throws InterruptedException {
+    void consumer() throws InterruptedException {
 
         Consumer<String> consumer = x -> {
             System.out.println(x);
@@ -87,7 +87,7 @@ public class Function {
      * Supplier<T>——提供T对象（例如工厂），不接收值
      */
     @Test
-    public void supplier() {
+    void supplier() {
 
         Supplier<List<String>> supplier = () -> Lists.newArrayList("aa", "bb");
 
@@ -98,7 +98,7 @@ public class Function {
      * Predicate<T>——接收T对象并返回boolean
      */
     @Test
-    public void predicate() {
+    void predicate() {
 
         Predicate<Integer> predicate = x -> x == 12;
         /*
@@ -118,7 +118,7 @@ public class Function {
      * UnaryOperator<T>——接收T对象，返回T对象
      */
     @Test
-    public void unaryOperator() { //一元运算,继承Function 和Function不同的是:传入值和返回值类型一致
+    void unaryOperator() { //一元运算,继承Function 和Function不同的是:传入值和返回值类型一致
 
         UnaryOperator<List<String>> operator = strings -> strings.subList(1, 3);
 
@@ -129,14 +129,14 @@ public class Function {
 
 
     @Test
-    public void toIntFunction() {
+    void toIntFunction() {
 
         ToIntFunction<List<Article>> intFunction = List::size;
 
         System.out.println(intFunction.applyAsInt(Lists.newArrayList()));
     }
 
-//    public void
+//    void
 
 
     //各类函数汇总

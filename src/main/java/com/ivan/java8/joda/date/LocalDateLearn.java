@@ -1,7 +1,7 @@
 package com.ivan.java8.joda.date;
 
-import com.ivan.java8.kit.DateKit;
-import org.junit.Test;
+import com.crayon2f.common.kit.DateKit;
+import org.junit.jupiter.api.Test;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -14,10 +14,10 @@ import java.time.temporal.TemporalQuery;
  * Created by feiFan.gou on 2018/1/20 15:13.
  * DateTime 学习
  */
-public class LocalDateLearn {
+class LocalDateLearn {
 
     @Test
-    public void staticMethod() {
+    void staticMethod() {
 
         LocalDate date = LocalDate.now();
         System.out.println(String.format("toString : %s", date));
@@ -37,7 +37,7 @@ public class LocalDateLearn {
     }
 
     @Test
-    public void method() {
+    void method() {
 
         LocalDate date = LocalDate.now();
         System.out.println(String.format("day of month : %s", date.getDayOfMonth()));

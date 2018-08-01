@@ -1,14 +1,14 @@
 package com.ivan.java8.optional;
 
 import com.ivan.java8.kit.StringKit;
-import com.ivan.java8.pojo.Article;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Article;
+import org.junit.jupiter.api.Test;
 import java.util.Optional;
 
 /**
  * Created by feiFan.gou on 2017/12/22 17:56.
  */
-public class OptionalLearn {
+class OptionalLearn {
 
 
     private static boolean bool = false;
@@ -21,7 +21,7 @@ public class OptionalLearn {
     }
 
     @Test
-    public void ifPresent() {
+    void ifPresent() {
 
         Article article = new Article("title");
         System.out.println(testIfPresent(article));
@@ -37,7 +37,7 @@ public class OptionalLearn {
      */
 
     @Test
-    public void orElseWithManyFilers() {
+    void orElseWithManyFilers() {
 
         Integer i = 3;
 //        Integer i = 9;
@@ -58,7 +58,7 @@ public class OptionalLearn {
      * t为null时候,返回一个T类型的(默认)值
      */
     @Test
-    public void orElse() {
+    void orElse() {
 
         Optional<String> stringOptional = Optional.empty();
         System.out.println(stringOptional.orElse("empty"));
@@ -69,7 +69,7 @@ public class OptionalLearn {
      * t为null时候,传入一个接口,并返回类型T的值
      */
     @Test
-    public void orElseGet() {
+    void orElseGet() {
 
         Optional<String> stringOptional = Optional.empty();
         stringOptional.orElseGet(this::empty);
@@ -81,7 +81,7 @@ public class OptionalLearn {
      * t为null时候,抛出一个异常
      */
     @Test
-    public void orElseThrow() {
+    void orElseThrow() {
 
         String string = StringKit.empty;
         if (bool) {
@@ -101,7 +101,7 @@ public class OptionalLearn {
      * !!! 需要有结束函数
      */
     @Test
-    public void map() {
+    void map() {
 
         Optional<String> stringOptional = Optional.of("23");
 
@@ -127,7 +127,7 @@ public class OptionalLearn {
      * 过滤器,同stream中的filter
      */
     @Test
-    public void filter() {
+    void filter() {
 
         Optional<String> stringOptional = Optional.empty();
 //        stringOptional.filter(String::isEmpty).ifPresent(s -> System.out.println("empty"));
@@ -142,7 +142,7 @@ public class OptionalLearn {
      * 而flatMap方法的mapping函数必须是Optional。
      */
     @Test
-    public void flatMap() {
+    void flatMap() {
 
         Optional<String> stringOptional = Optional.of("abc");
         stringOptional.flatMap(s -> Optional.of(s.toUpperCase())).ifPresent(System.out::print);

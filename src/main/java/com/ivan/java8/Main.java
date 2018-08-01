@@ -1,30 +1,28 @@
 package com.ivan.java8;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ivan.java8.function.FunInterface;
 import com.ivan.java8.kit.StringKit;
-import com.ivan.java8.pojo.Article;
+import com.crayon2f.common.pojo.Article;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.ParseException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.stream.Collectors;
 
-public class Main {
+class Main {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
@@ -59,7 +57,7 @@ public class Main {
     }
 
     @Test
-    public void test() throws IOException, ParseException {
+    void test() throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader("D:\\downloads\\剧本1.lrc"));
         String line;
@@ -88,7 +86,7 @@ public class Main {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void test2() throws IOException {
+    void test2() throws IOException {
 
 //        Path path = Paths.get("C:\\Users\\feifan.gou\\Desktop\\download\\increase_copper_cache.backup");
 //
@@ -109,7 +107,7 @@ public class Main {
 
     @Test
     @SneakyThrows
-    public void jse() {
+    void jse() {
 
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("javascript");
         Object eval = engine.eval("(12+34.0+0.98-34)");

@@ -1,14 +1,14 @@
 package com.ivan.java8.thread.fork;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
-public class ForkJoinTest {
+class ForkJoinTest {
 
     @Test
-    public void test() {
+    void test() {
 
         ForkJoinPool pool = new ForkJoinPool();
 

@@ -3,7 +3,6 @@ package com.ivan.java8.function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.ivan.java8.pojo.Person;
 import javafx.util.Builder;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -25,7 +24,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -189,11 +187,39 @@ class FunctionExtend {
 
     }
 
+    @Getter
+    class Person {
 
+        private int age;
+        private String name;
 
+        Person(int age, String name) {
+            this.age = age;
+            this.name = name;
+        }
 
+        Person(int age) {
+            this.age = age;
+        }
 
+        public Person(String name) {
+            this.name = name;
+        }
 
+        @Override
+        public boolean equals(Object obj) {
+            if (null == obj) {
+                return false;
+            }
+            Person person = (Person) obj;
+            return person.name.equals(this.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.age;
+        }
+    }
 
 
 }

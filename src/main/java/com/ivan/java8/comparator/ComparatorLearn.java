@@ -1,8 +1,8 @@
 package com.ivan.java8.comparator;
 
 import com.google.common.collect.Lists;
-import com.ivan.java8.pojo.Article;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Article;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,10 +12,10 @@ import java.util.List;
  * Created by feiFan.gou on 2018/1/12 14:53.
  * 比较器,正对集合、数组
  */
-public class ComparatorLearn {
+class ComparatorLearn {
 
     @Test
-    public void comparing() {
+    void comparing() {
 
         // <注意泛型>  !!!!!
         // param_1 : 直接指定要比较的key,按默认顺序比较
@@ -32,7 +32,7 @@ public class ComparatorLearn {
     }
 
     @Test
-    public void comparingGeneric() {
+    void comparingGeneric() {
 
         Comparator<Article> doubleComparator = Comparator.comparingDouble(Article::getPrice);
         Article.data.sort(doubleComparator.reversed());
@@ -49,7 +49,7 @@ public class ComparatorLearn {
     }
 
     @Test
-    public void reverseOrder() {
+    void reverseOrder() {
 
         //倒序,泛型必须实现Comparable
         Comparator<String> comparator = Comparator.reverseOrder();
@@ -60,7 +60,7 @@ public class ComparatorLearn {
     }
 
     @Test
-    public void naturalOrder() {
+    void naturalOrder() {
 
         //自然顺序,同样泛型必须实现Comparable
         List<String> reverseList = Lists.newArrayList("ad","b","nice","center");
@@ -69,7 +69,7 @@ public class ComparatorLearn {
     }
 
     @Test
-    public void thenComparing() {
+    void thenComparing() {
 
         //1.传入一个Function,指定比较的key(即用什么比较)
         Comparator<Article> articleComparator = Comparator.comparing(Article::getAuthor).thenComparing(Article::getTitle).reversed();
@@ -86,7 +86,7 @@ public class ComparatorLearn {
     }
 
     @Test
-    public void thenComparingGeneric() {
+    void thenComparingGeneric() {
 
         //同comparingInt,comparingDouble,comparingLong 原理一致
 
@@ -97,7 +97,7 @@ public class ComparatorLearn {
     }
 
     @Test
-    public void nullsFirst() {
+    void nullsFirst() {
 
         // 看到函数名字大概就知道了是啥意思了,碰到null值,不会报空指针,而是排到前面
         List<String> list = Lists.newArrayList("ad", "b", "nice", "center", null);
@@ -107,7 +107,7 @@ public class ComparatorLearn {
     }
 
     @Test
-    public void nullsLast() {
+    void nullsLast() {
 
         // 看到函数名字大概就知道了是啥意思了,碰到null值,不会报空指针,而是排到前面
         List<String> list = Lists.newArrayList("ad", "b", "nice", "center", null);
@@ -117,7 +117,7 @@ public class ComparatorLearn {
     }
 
     @Test
-    public void reversed() {
+    void reversed() {
 
         //倒序
         List<String> list = Lists.newArrayList("ad", "b", "nice", "center", null);

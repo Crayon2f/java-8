@@ -2,7 +2,7 @@ package com.ivan.java8.thread;
 
 import com.google.common.collect.Lists;
 import com.ivan.java8.kit.StringKit;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.List;
@@ -11,11 +11,11 @@ import java.util.concurrent.*;
 /**
  * Created by feiFan.gou on 2018/3/1 18:14.
  */
-public class Main {
+class Main {
 
 
     @Test
-    public void implRunnable() throws InterruptedException {
+    void implRunnable() throws InterruptedException {
 
         Runnable runnable = this::asynchronous;
 
@@ -33,7 +33,7 @@ public class Main {
     }
 
     @Test
-    public void extendsThread() {
+    void extendsThread() {
 
         MyThread thread = new MyThread();
         thread.run();
@@ -41,7 +41,7 @@ public class Main {
     }
 
     @Test
-    public void useThreadPool() {
+    void useThreadPool() {
 
 //        Runnable runnable = this::asynchronous;
         ExecutorService executor = Executors.newCachedThreadPool();
@@ -52,7 +52,7 @@ public class Main {
     }
 
     @Test
-    public void test() throws ExecutionException, InterruptedException {
+    void test() throws ExecutionException, InterruptedException {
 
         Callable<List<String>> callable = this::implCallback;
         FutureTask<List<String>> task = new FutureTask<>(callable);
@@ -68,7 +68,7 @@ public class Main {
     }
 
     @Test
-    public void test2() {
+    void test2() {
 
         System.out.println(new Date(1520586876009L));
     }

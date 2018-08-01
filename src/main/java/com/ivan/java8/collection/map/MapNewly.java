@@ -3,7 +3,7 @@ package com.ivan.java8.collection.map;
 import com.ivan.java8.kit.StringKit;
 import com.sun.istack.internal.NotNull;
 import lombok.NonNull;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by feiFan.gou on 2017/12/9 11:38.
  * 1.8 map新增的方法
  */
-public class MapNewly {
+class MapNewly {
 
     private Map<String, String> map = new HashMap<String, String>() {{
         put("a", null);
@@ -24,7 +24,7 @@ public class MapNewly {
     }};
 
     @Test
-    public void each() {
+    void each() {
 
         map.forEach((key, value) -> {
             System.out.println(key);
@@ -34,7 +34,7 @@ public class MapNewly {
     }
 
     @Test
-    public void replace() {
+    void replace() {
 
         map.replace("a", "3"); //覆盖
         System.out.println(map.get("a"));
@@ -49,7 +49,7 @@ public class MapNewly {
      * 替换所有，根据定义的BiFunction函数
      */
     @Test
-    public void replaceAll() {
+    void replaceAll() {
 
         map.replaceAll((key, value) -> {
 
@@ -65,7 +65,7 @@ public class MapNewly {
      * 如果值也符合,才remove
      */
     @Test
-    public void remove() {
+    void remove() {
 
         map.remove("a", "1");
         System.out.println(map);
@@ -75,7 +75,7 @@ public class MapNewly {
      * 获取一个不存在的key,但是依然有值,即存入的默认值
      */
     @Test
-    public void getOrDefault() {
+    void getOrDefault() {
 
 //        map.put("f", null);
         System.out.println(map.getOrDefault("f", "6"));
@@ -87,7 +87,7 @@ public class MapNewly {
      *  key value 均为非空,如果传null,则会报 NPE
      */
     @Test
-    public void merge() {
+    void merge() {
 
         System.out.println(map.get("a"));
         map.merge("a", null, (oldValue, param) -> oldValue + param);
@@ -100,7 +100,7 @@ public class MapNewly {
      * 当key对应的value为null或者key不存在时，使用计算的结果作为新的value(根据key计算)
      */
     @Test
-    public void computeIfAbsent() {
+    void computeIfAbsent() {
 
 //        map.put("computeIfAbsent", null);
 //        map.put("computeIfAbsent", "computeIfAbsent");
@@ -112,7 +112,7 @@ public class MapNewly {
      * 当key对应的value存在，并且不是null时，使用计算的结果作为新的value 【******并且会根据key排序】
      */
     @Test
-    public void computeIfPresent() {
+    void computeIfPresent() {
 
         map.put("computeIfPresent", null);
 //        map.put("computeIfPresent", "computeIfPresent");
@@ -125,14 +125,14 @@ public class MapNewly {
      * value为null 或者key不存在，都会put进去
      */
     @Test
-    public void putIfAbsent() {
+    void putIfAbsent() {
 
         map.putIfAbsent("a", "33");
         System.out.println(map);
     }
 
     @Test
-    public void sortByEntryComparator() {
+    void sortByEntryComparator() {
 
         Map<String, String> map = new HashMap<>();
         map.put("1", "4");
@@ -147,7 +147,7 @@ public class MapNewly {
     }
 
     @Test
-    public void compute() {
+    void compute() {
 
         map.compute("a", (key, value) -> {
             System.out.printf("key = %s\r", key);

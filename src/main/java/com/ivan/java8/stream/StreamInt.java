@@ -1,8 +1,8 @@
 package com.ivan.java8.stream;
 
 import com.google.common.collect.Lists;
-import com.ivan.java8.pojo.Article;
-import org.junit.Test;
+import com.crayon2f.common.pojo.Article;
+import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -12,13 +12,13 @@ import java.util.stream.IntStream;
 /**
  * Created by feiFan.gou on 2017/12/12 11:31.
  */
-public class StreamInt {
+class StreamInt {
 
     /**
      * 取一个区间
      */
     @Test
-    public void range() {
+    void range() {
 
         IntStream.range(1,11).forEachOrdered(System.out::println);
     }
@@ -27,7 +27,7 @@ public class StreamInt {
      * 初始化一个IntStream of(Integer...values)
      */
     @Test
-    public void of() {
+    void of() {
 
         IntStream intStream = IntStream.of(3,5,4,3,3);
 
@@ -40,13 +40,13 @@ public class StreamInt {
     }
 
     @Test
-    public void convert2List() {
+    void convert2List() {
         IntStream intStream = IntStream.of(3,4,5,6);
         System.out.println(intStream.boxed().collect(Collectors.toList()));
     }
 
     @Test
-    public void test() {
+    void test() {
 
         IntStream intStream = IntStream.of(3,5,4,3,3);
 //        System.out.println(intStream.sorted().sum());
