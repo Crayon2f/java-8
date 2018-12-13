@@ -130,12 +130,12 @@ class CollectorsLearn {
     @Test
     void collectingAndThen() {
 
-//        Map<String, String> map = Article.data.stream().collect(
-//                Collectors.collectingAndThen(Collectors.groupingBy(Article::getAuthor, Collectors.mapping(Article::getTitle, Collectors.joining(","))), result -> result));
+        Map<String, String> map = Article.data.stream().collect(
+                Collectors.collectingAndThen(Collectors.groupingBy(Article::getAuthor, Collectors.mapping(Article::getTitle, Collectors.joining(","))), result -> result));
 
-        Map<Gender, String> map = Employee.persons().stream().collect(
-                Collectors.collectingAndThen(Collectors.groupingBy(Employee::getGender, Collectors.mapping(Employee::getName, Collectors.joining(","))), result -> result)
-        );
+//        Map<Gender, String> map = Employee.persons().stream().collect(
+//                Collectors.collectingAndThen(Collectors.groupingBy(Employee::getGender, Collectors.mapping(Employee::getName, Collectors.joining(","))), result -> result)
+//        );
         System.out.println(map);
     }
 

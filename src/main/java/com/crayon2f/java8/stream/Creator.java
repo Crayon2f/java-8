@@ -1,5 +1,6 @@
 package com.crayon2f.java8.stream;
 
+import com.crayon2f.common.pojo.Data;
 import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Test;
 
@@ -78,5 +79,14 @@ class Creator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void test() {
+
+        IntStream.range(1, 9).forEach(System.out::println);
+
+        System.out.println(Data.INTEGER_LIST);
+        System.out.println(Data.STRING_LIST);
     }
 }

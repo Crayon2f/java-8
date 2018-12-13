@@ -1,5 +1,6 @@
 package com.crayon2f.java8.stream;
 
+import com.crayon2f.common.pojo.Data;
 import com.crayon2f.java8.kit.StringKit;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -252,5 +253,18 @@ class StreamLearn {
 
         List<Integer> integerList = Arrays.stream(new String[]{"4", "5", "66"}).map(Integer::parseInt).collect(Collectors.toList());
         System.out.println(integerList);
+    }
+
+    @Test
+    void onClose() {
+
+        List<String> stringList = Lists.newArrayList();
+        Stream<String> stream = Data.STRING_LIST.stream();
+
+        stream.peek(stringList::add).onClose(() -> {
+            System.out.println("stream is closed");
+            System.out.println(stringList);
+        }).forEach(System.out::println);
+        stream.close();
     }
 }
