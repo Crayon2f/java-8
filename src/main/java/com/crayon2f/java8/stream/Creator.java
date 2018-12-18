@@ -35,7 +35,8 @@ class Creator {
         // for example: 取出12个奇数,从1开始
         Stream<Integer> iterate = Stream.iterate(1, i -> i + 2).limit(12);
         iterate.forEach(System.out::println);
-        // 6.Stream.generate() 传入无参的函数
+        // 6.Stream.generate() 传入无参的函数, 必须限制stream的长度不然会内存溢出!!!
+        // 如果不限制会根据传入的函数一直生成,直到内存溢出
         System.out.println("============== math.random ==============");
         Stream.generate(Math::random).limit(5).forEach(System.out::println);
         System.out.println("============== random.nextInt ==============");
@@ -88,5 +89,7 @@ class Creator {
 
         System.out.println(Data.INTEGER_LIST);
         System.out.println(Data.STRING_LIST);
+        Stream.generate(new Random()::nextInt).limit(5).forEach(System.out::println);
+        System.out.println(new Random().nextInt());
     }
 }
