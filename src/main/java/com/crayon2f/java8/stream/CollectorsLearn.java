@@ -106,9 +106,8 @@ class CollectorsLearn {
     @Test
     void mapping() {
 
-        Map<String, String> collect = Article.data.stream().collect(Collectors.groupingBy(Article::getTitle,
-                Collectors.mapping(Article::getAuthor,
-                        Collectors.joining("|"))));
+        Map<String, List<String>> collect = Article.data.stream().collect(Collectors.groupingBy(Article::getTitle,
+                Collectors.mapping(Article::getAuthor,Collectors.toList())));
         System.out.println(collect);
     }
 
