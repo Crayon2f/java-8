@@ -1,5 +1,6 @@
 package com.crayon2f.java8;
 
+import com.crayon2f.java8.kit.CollectorKit;
 import com.crayon2f.java8.kit.StringKit;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -15,6 +16,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -114,6 +116,26 @@ class Main {
         System.out.println(eval);
 
 
+    }
+
+    @Test
+    void testToMap() {
+
+        ArrayList<Article> list = Lists.newArrayList(new Article("标题4", "作者1", 12),
+                new Article("标题4", "作者3", 10),
+                new Article("标题4", "作者4", 11, 3.4),
+                new Article("标题4", null, 1),
+                new Article("标题10", "作者5", 3, 3d),
+                new Article("标题 6", "作者6", 4, 7d),
+                new Article("标题2", "作者7", 7),
+                new Article("标题8", "作者8", 5),
+                new Article("标题9", "作者9", 2, 8.3),
+                new Article("标题5", "作者10", 6),
+                new Article("标题11", "作者11", 9),
+                new Article("标题12", "作者12", 8, 9.0d));
+//        Map<String, String> map = list.stream().collect(Collectors.toMap(Article::getTitle, Article::getAuthor));
+        Map<String, String> map = list.stream().collect(CollectorKit.toMap(Article::getTitle, Article::getAuthor));
+        System.out.println(map);
     }
 
 }
